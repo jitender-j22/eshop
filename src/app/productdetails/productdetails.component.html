@@ -1,0 +1,122 @@
+<app-header></app-header>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<app-leftsidebar></app-leftsidebar>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="/assets/images/shop/{{product.images}}.jpg" alt="" />
+								<!-- <img src="/assets/images/product-details/1.jpg" alt="" /> -->
+								<!-- <h3>ZOOM</h3> -->
+							</div>
+							<!-- <div id="similar-product" class="carousel slide" data-ride="carousel"> -->
+
+								  <!-- Wrapper for slides -->
+								  <!-- <div class="carousel-inner">
+										<div class="item active">
+										  <a href=""><img src="/assets/images/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="/assets/images/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="/assets/images/product-details/similar3.jpg" alt=""></a>
+										</div>
+										<div class="item">
+										  <a href=""><img src="/assets/images/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="/assets/images/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="/assets/images/product-details/similar3.jpg" alt=""></a>
+										</div>
+										<div class="item">
+										  <a href=""><img src="/assets/images/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="/assets/images/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="/assets/images/product-details/similar3.jpg" alt=""></a>
+										</div>
+
+									</div> -->
+
+								  <!-- Controls -->
+								  <!-- <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div> -->
+
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+								<img src="/assets/images/product-details/new.jpg" class="newarrival" alt="" />
+								<h2>{{product.title}}</h2>
+								<p>Web ID: {{product.sku}}</p>
+								<img src="/assets/images/product-details/rating.png" alt="" />
+								<span>
+									<span>US ${{product.price}}</span>
+									<!-- <label>Quantity:</label>
+									<input type="text" value="3" /> -->
+									<button type="button" (click)="addToCart(product)" class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</button>
+								</span>
+								<p *ngIf="product.availability"><b>Availability:</b> In Stock</p>
+								<p *ngIf="!product.availability"><b>Availability:</b> Out of Stock</p>
+								<!-- <p><b>Condition:</b> New</p> -->
+								<p><b>Brand:</b> {{product.brand}}</p>
+								<!-- <a href=""><img src="/assets/images/product-details/share.png" class="share img-responsive"  alt="" /></a> -->
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+
+				<ngb-tabset class="category-tab shop-details-tab">
+				  <ngb-tab id="details-tabset" title="Details">
+				    <ng-template ngbTabContent>
+							<p *ngIf="product.availability"><b>Availability:</b> In Stock</p>
+							<p *ngIf="!product.availability"><b>Availability:</b> Out of Stock</p>
+							<p><b>Brand:</b> {{product.brand}}</p>
+							<p><b>Description:</b> {{product.description}} </p>
+				    </ng-template>
+				  </ngb-tab>
+				  <ngb-tab id="reviews-tabset">
+				    <ng-template ngbTabTitle>Reviews <b>(5)</b></ng-template>
+				    <ng-template ngbTabContent >
+							<div id="reviews">
+								<div class="col-sm-12">
+									<ul>
+										<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+										<!-- <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+										<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li> -->
+									</ul>
+									<p>Lorem ipsum dolor sit amet,mco laboris nisi ut aliquip ex ea commodo consequat.</p>
+									<p><b>Write Your Review</b></p>
+
+									<form action="#">
+										<span>
+											<input type="text" placeholder="Your Name"/>
+											<input type="email" placeholder="Email Address"/>
+										</span>
+										<textarea name="" ></textarea>
+										<b>Rating: </b> <img src="/assets/images/product-details/rating.png" alt="" />
+										<button type="button" class="btn btn-default pull-right">
+											Submit
+										</button>
+									</form>
+								</div>
+							</div>
+				    </ng-template>
+				  </ngb-tab>
+				</ngb-tabset>
+				<p>&nbsp;</p>
+				<hr>
+				<div class="clearfix"></div>
+				<app-recommended-products></app-recommended-products>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+  <app-footer></app-footer>

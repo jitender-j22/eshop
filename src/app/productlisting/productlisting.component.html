@@ -1,0 +1,73 @@
+
+<app-header></app-header>
+
+	<section id="advertisement">
+		<div class="container">
+			<img src="/assets/images/shop/advertisement.jpg" alt="" />
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<app-leftsidebar></app-leftsidebar>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<!-- <div class="container">
+						<div class="row">
+							<div class="col-sm-3">
+								<select class="" name="sortBy" ([ngModel])="sortBy">
+										<option value="">price low to high</option>
+										<option value="">price high to low</option>
+										<option value="">name</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<hr> -->
+					<div class="features_items "><!--features_items-->
+						<h2 class="title text-center">Shop Products</h2>
+						<div class="col-sm-4" *ngFor="let product of productList">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="/assets/images/shop/{{product.images}}.jpg" alt="" />
+										<h2>${{product.price}}</h2>
+										<p>{{product.title}}</p>
+										<a href="javascript:void()" (click)="addToCart(product)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a routerLink="/product-details/{{product._id}}" class="btn btn-default "><i class="fa fa-eye"></i> View Detail</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>${{product.price}}</h2>
+											<p>{{product.title}}</p>
+											<a href="javascript:void(0)" (click)="addToCart(product)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<a routerLink="/product-details/{{product._id}}" class="btn btn-default "><i class="fa fa-eye"></i> View Detail</a>
+											<!-- <a (click)="goToProductDetail(product)" class="btn btn-default "><i class="fa fa-eye"></i> View Detail</a> -->
+										</div>
+									</div>
+								</div>
+								<!-- <div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										<li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									</ul>
+								</div> -->
+							</div>
+						</div>
+
+						<ul class="pagination">
+							<li class="active"><a href="">1</a></li>
+							<li><a href="">2</a></li>
+							<li><a href="">3</a></li>
+							<li><a href="">&raquo;</a></li>
+						</ul>
+					</div><!--features_items-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+<app-footer></app-footer>

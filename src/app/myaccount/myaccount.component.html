@@ -1,0 +1,151 @@
+
+<app-header></app-header>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+          <div class="left-sidebar">
+            <h2>My Account</h2>
+            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a routerLink="/myaccount">My Profile</a></h4>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a routerLink="/myaccount#">My Orders</a></h4>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a routerLink="/myaccount#">My Addresses</a></h4>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a routerLink="/myaccount#">Change Password</a></h4>
+                </div>
+              </div>
+            </div><!--/category-productsr-->
+
+          </div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+          <div class="step-one">
+    				<h2 class="heading">My Profile</h2>
+    			</div>
+    			<div class="checkout-options clearfix">
+            <div class="col-sm-6 clearfix">
+              <div class="login-form"><!--profile form-->
+    						<h2>Edit your profile here</h2>
+    						<form action="#">
+                  <input type="text" placeholder="Company Name">
+                  <input type="text" placeholder="Email*">
+                  <input type="text" placeholder="Title">
+                  <input type="text" placeholder="First Name *">
+                  <input type="text" placeholder="Middle Name">
+                  <input type="text" placeholder="Last Name *">
+
+    							<button type="submit" class="btn btn-default">Update</button>
+    						</form>
+    					</div><!--/profile form-->
+            </div>
+    			</div>
+
+          <div class="step-one">
+    				<h2 class="heading">My Orders</h2>
+    			</div>
+    			<div class="checkout-options clearfix">
+
+              <div class="login-form"><!--orders form-->
+  						<h2>Your order history</h2>
+  						<form action="#">
+
+  							<input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email Address" />
+
+  							<button type="submit" class="btn btn-default">Update</button>
+  						</form>
+  					</div><!--/orders form-->
+
+    			</div>
+
+          <div class="step-one">
+    				<h2 class="heading">My Addresses</h2>
+    			</div>
+    			<div class="checkout-options clearfix">
+            <div class="col-sm-6 clearfix">
+              <div class="bill-to">
+  							<p>Your default address</p>
+  							<div class="form-one form-two">
+  								<form>
+
+  									<input type="text" placeholder="Address 1 *">
+  									<input type="text" placeholder="Address 2">
+
+                    <input type="text" placeholder="Zip / Postal Code *">
+  									<select>
+  										<option>-- Country --</option>
+  										<option>United States</option>
+  										<option>Bangladesh</option>
+                      <option>UK</option>
+  										<option>India</option>
+  										<option>Pakistan</option>
+  										<option>Ucrane</option>
+  										<option>Canada</option>
+  										<option>Dubai</option>
+  									</select>
+  									<select>
+  										<option>-- State / Province / Region --</option>
+  										<option>United States</option>
+  										<option>Bangladesh</option>
+  										<option>UK</option>
+  										<option>India</option>
+  										<option>Pakistan</option>
+  										<option>Ucrane</option>
+  										<option>Canada</option>
+  										<option>Dubai</option>
+  									</select>
+  									<!-- <input type="text" placeholder="Phone *"> -->
+  									<input type="text" placeholder="Mobile Phone *">
+
+  								</form>
+  							</div>
+  							<div class="form-two">
+  								<form>
+
+  								</form>
+  							</div>
+  						</div>
+			      </div>
+    			</div>
+
+
+          <div class="step-one">
+    				<h2 class="heading">Change Password</h2>
+    			</div>
+    			<div class="checkout-options clearfix">
+            <div class="col-sm-6 clearfix">
+              <div class="login-form"><!--orders form-->
+    						<h2>Change your password here</h2>
+    						<form action="#">
+    							<input type="text" placeholder="Old Password" />
+    							<input type="email" placeholder="New Password" />
+    							<input type="email" placeholder="Confirm Password" />
+
+    							<button type="submit" class="btn btn-default">Update</button>
+    						</form>
+    					</div><!--/orders form-->
+            </div>
+    			</div>
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+<app-footer></app-footer>
