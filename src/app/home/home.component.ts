@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
     this.productList = this.productService.products;
   }
 
-  addToCart(product) {
-    this.cartService.addToCart(5, product);
+  addToCart(productId) {
+    this.cartService.addToCart(productId);
   }
 
 }

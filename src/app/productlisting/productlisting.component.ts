@@ -24,10 +24,10 @@ export class ProductlistingComponent implements OnInit {
     });
   }
 
-  addToCart(pid) {
-    //console.log("pid :: "+ pid);
+  addToCart(productId) {
+    console.log("pid :: "+ productId);
     //this.cartService.addToCart(userId, pid);
-    this.cartService.addToCart(5, pid);
+    this.cartService.addToCart(productId);
   }
 
   // goToProductDetail(product:Product) {

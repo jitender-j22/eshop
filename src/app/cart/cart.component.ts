@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+// import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { Product } from '../models/product';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
-import { Shopcart } from '../models/shopcart';
+import { Shopcart, CartProducts } from '../models/shopcart';
 
 @Component({
   selector: 'app-cart',
@@ -14,15 +14,22 @@ import { Shopcart } from '../models/shopcart';
 })
 export class CartComponent implements OnInit {
 
-  shopcart:Shopcart;
-  closeResult: string;
+  cartProducts:CartProducts;
+  shopcart:Shopcart = {"grossTotal":0, "tax":0, "shippingCost":0, "netTotal": 0 };
+  // closeResult: string;
 
-  constructor(public cartService:CartService, private toastr: ToastrService, private modalService: NgbModal) {
-    this.shopcart = this.cartService.getCart();
-    console.log(this.shopcart);
+  constructor(public cartService: CartService, private toastr: ToastrService) {
+
   }
 
   ngOnInit() {
+    this.cartService.getCart().subscribe((data:any) =>{
+
+      this.cartProducts = data;
+      //console.log(this.cartProducts);
+      this.shopcart = this.cartService.recalculateCart(this.cartProducts);
+    });
+
   }
 
   // open(content) {
@@ -35,30 +42,41 @@ export class CartComponent implements OnInit {
 
   incrementProductQty(product){
     product.productQty++;
-    this.toastr.success('Product quantity updated!');
-    this.cartService.recalculateCart();
+
+    this.cartService.incrementProductQty(product).subscribe((data:any)=>{
+
+      this.toastr.success('Product quantity updated!');
+      this.cartProducts = data;
+      this.shopcart = this.cartService.recalculateCart(this.cartProducts);
+    });
     return;
   }
 
   decrementProductQty(product){
     if(product.productQty>1) {
       product.productQty--;
-      this.toastr.success('Product quantity updated!');
-      this.cartService.recalculateCart();
+
+      this.cartService.decrementProductQty(product).subscribe((data:any)=>{
+
+        this.toastr.success('Product quantity updated!');
+        this.cartProducts = data;
+        this.shopcart = this.cartService.recalculateCart(this.cartProducts);
+      });
+
     }else {
       this.toastr.warning('Delete the product from the delete button!');
     }
     return;
   }
 
-  deleteProduct(product){
-    this.cartService.deleteProduct(product);
+  removeCartProduct(product){
+    this.cartService.removeCartProduct(product).subscribe((data:any)=>{
+
+      this.toastr.success('Product removed from cart!');
+      this.cartProducts = data;
+      this.shopcart = this.cartService.recalculateCart(this.cartProducts);
+    });
     return;
   }
 
-  /*updateQty(product) {
-    console.log(product.productQty);
-    this.cartService.recalculateCart();
-    return;
-  }*/
 }

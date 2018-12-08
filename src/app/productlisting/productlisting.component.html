@@ -36,14 +36,14 @@
 										<img src="/assets/images/shop/{{product.images}}.jpg" alt="" />
 										<h2>${{product.price}}</h2>
 										<p>{{product.title}}</p>
-										<a href="javascript:void()" (click)="addToCart(product)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a href="javascript:void()" (click)="addToCart(product._id)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 										<a routerLink="/product-details/{{product._id}}" class="btn btn-default "><i class="fa fa-eye"></i> View Detail</a>
 									</div>
 									<div class="product-overlay">
 										<div class="overlay-content">
 											<h2>${{product.price}}</h2>
 											<p>{{product.title}}</p>
-											<a href="javascript:void(0)" (click)="addToCart(product)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<a href="javascript:void(0)" (click)="addToCart(product._id)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 											<a routerLink="/product-details/{{product._id}}" class="btn btn-default "><i class="fa fa-eye"></i> View Detail</a>
 											<!-- <a (click)="goToProductDetail(product)" class="btn btn-default "><i class="fa fa-eye"></i> View Detail</a> -->
 										</div>

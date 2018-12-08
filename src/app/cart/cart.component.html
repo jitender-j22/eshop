@@ -23,34 +23,32 @@
 					</thead>
 					<tbody>
 
-
-						<!-- <tr *ngFor="let product of shopcart.products"> -->
-						<tr *ngFor="let product of shopcart.products">
+						<tr *ngFor="let product of cartProducts">
 							<td class="cart_product">
-								<a href=""><img src="/assets/images/shop/{{product.product.images}}.jpg" alt=""></a>
+								<a href=""><img src="/assets/images/shop/{{product.productId.images}}.jpg" alt=""></a>
 							</td>
 							<td class="cart_description">
-								<h4><a href="">{{product.product.title}}</a></h4>
-								<p>Web ID: {{product.product.sku}}</p>
+								<h4><a href="">{{product.productId.title}}</a></h4>
+								<p>Web ID: {{product.productId.sku}}{{product._id}}</p>
 							</td>
 							<td class="cart_price">
-								<p>${{product.product.price}}</p>
+								<p>${{product.productId.price}}</p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 
-									<a class="cart_quantity_down" (click)="decrementProductQty(product)"> - </a>
+									<a class="cart_quantity_down cursor-pointer" (click)="decrementProductQty(product)"> - </a>
 									<!-- <input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly (onchange)="updateQty(product)"  autocomplete="off" size="2"> -->
 									<input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly  autocomplete="off" size="2">
-									<a class="cart_quantity_up"  (click)="incrementProductQty(product)"> + </a>
+									<a class="cart_quantity_up cursor-pointer"  (click)="incrementProductQty(product)"> + </a>
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">${{product.product.price * product.productQty}}</p>
+								<p class="cart_total_price">${{product.productId.price * product.productQty}}</p>
 							</td>
 							<td class="cart_delete">
 								<!-- <a class="cart_quantity_delete" (click)="open(content)"><i class="fa fa-times"></i></a> -->
-								<a class="cart_quantity_delete" (click)="deleteProduct(product)"><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete cursor-pointer" (click)="removeCartProduct(product)"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
 
@@ -60,7 +58,7 @@
 		</div>
 	</section> <!--/#cart_items-->
 
-<app-confirmmodal></app-confirmmodal>
+<!-- <app-confirmmodal></app-confirmmodal> -->
 
 	<section id="do_action">
 		<div class="container">
@@ -70,58 +68,6 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
-					<!-- <div class="chose_area">
-						<ul class="user_option">
-							<li>
-								<input type="checkbox">
-								<label>Use Coupon Code</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Use Gift Voucher</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Estimate Shipping & Taxes</label>
-							</li>
-						</ul>
-						<ul class="user_info">
-							<li class="single_field">
-								<label>Country:</label>
-								<select>
-									<option>United States</option>
-									<option>Bangladesh</option>
-									<option>UK</option>
-									<option>India</option>
-									<option>Pakistan</option>
-									<option>Ucrane</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-
-							</li>
-							<li class="single_field">
-								<label>Region / State:</label>
-								<select>
-									<option>Select</option>
-									<option>Dhaka</option>
-									<option>London</option>
-									<option>Dillih</option>
-									<option>Lahore</option>
-									<option>Alaska</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-
-							</li>
-							<li class="single_field zip-field">
-								<label>Zip Code:</label>
-								<input type="text">
-							</li>
-						</ul>
-						<a class="btn btn-default update" href="">Get Quotes</a>
-						<a class="btn btn-default check_out" href="">Continue</a>
-					</div>-->
 				</div>
 				<div class="col-sm-6">
 					<div class="total_area">
@@ -132,7 +78,7 @@
 							<li>Total <span>${{shopcart.netTotal}}</span></li>
 						</ul>
 							<!-- <a class="btn btn-default update" href="">Update</a> -->
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							<a class="btn btn-default check_out" href="/checkout">Checkout</a>
 					</div>
 				</div>
 			</div>
