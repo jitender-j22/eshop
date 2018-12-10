@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 import { CartService } from '../cart.service';
+import { UserService } from '../user.service';
 import { Shopcart, CartProducts } from '../models/shopcart';
+import { CurrentUser } from '../models/user';
 
 @Component({
   selector: 'app-checkout',
@@ -13,14 +15,28 @@ export class CheckoutComponent implements OnInit {
 
   cartProducts:CartProducts;
   shopcart:Shopcart = {"grossTotal":0, "tax":0, "shippingCost":0, "netTotal": 0 };
+  userProfile:CurrentUser = {};
+  userAddress = {};
+  orderSubmitted = false;
+  payment = {};
 
-  constructor(public cartService: CartService, private toastr: ToastrService) { }
+  constructor(public cartService: CartService, public userService: UserService, private toastr: ToastrService) {
+
+  }
 
   ngOnInit() {
     this.cartService.getCart().subscribe((data:any) =>{
-
       this.cartProducts = data;
       this.shopcart = this.cartService.recalculateCart(this.cartProducts);
+    });
+
+    this.userService.getCurrentUser().subscribe((userdata:any)=>{
+      // console.log(userdata);
+      this.userProfile = userdata;
+    });
+
+    this.userService.getUserShippingAddress().subscribe((shippingdata:any)=>{
+      this.userAddress = shippingdata;
     });
   }
 
@@ -62,4 +78,17 @@ export class CheckoutComponent implements OnInit {
     });
     return;
   }
+
+  saveOrder(userProfile, userAddress, cartProducts, shopcart, payment){
+
+    this.cartService.saveOrder(userProfile, userAddress, cartProducts, shopcart, payment).subscribe((data:any)=>{
+      this.toastr.success('Order placed successfully!');
+    });
+  }
+
+  // order() {
+  //   console.log("paymentmethod")
+  //   console.log(this.userProfile)
+  //   console.log(this.payment)
+  // }
 }

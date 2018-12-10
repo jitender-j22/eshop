@@ -34,195 +34,189 @@
 				<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
 			</div> -->
 			<!--/register-req-->
-
-			<div class="shopper-informations">
-				<div class="row">
-					<!-- <div class="col-sm-3">
-						<div class="shopper-info">
-							<p>Shopper Information</p>
-							<form>
-								<input type="text" placeholder="Display Name">
-								<input type="text" placeholder="User Name">
-								<input type="password" placeholder="Password">
-								<input type="password" placeholder="Confirm password">
-							</form>
-							<a class="btn btn-primary" href="">Get Quotes</a>
-							<a class="btn btn-primary" href="">Continue</a>
-						</div>
-					</div> -->
-					<div class="col-sm-5 clearfix">
-						<div class="bill-to">
-							<p>Billing and Shipping Address</p>
-							<div class="form-one">
+			<form name="orderForm" (ngSubmit)="orderf.form.valid && saveOrder(userProfile, userAddress, cartProducts, shopcart, payment)" #orderf="ngForm">
+				<div class="shopper-informations">
+					<div class="row">
+						<!-- <div class="col-sm-3">
+							<div class="shopper-info">
+								<p>Shopper Information</p>
 								<form>
-									<input type="text" placeholder="Company Name">
-									<input type="text" placeholder="Email*">
-									<input type="text" placeholder="Title">
-									<input type="text" placeholder="First Name *">
-									<input type="text" placeholder="Middle Name">
-									<input type="text" placeholder="Last Name *">
-
+									<input type="text" placeholder="Display Name">
+									<input type="text" placeholder="User Name">
+									<input type="password" placeholder="Password">
+									<input type="password" placeholder="Confirm password">
 								</form>
+								<a class="btn btn-primary" href="">Get Quotes</a>
+								<a class="btn btn-primary" href="">Continue</a>
 							</div>
-							<div class="form-two">
-								<form>
-									<input type="text" placeholder="Address 1 *">
-									<input type="text" placeholder="Address 2">
-									<input type="text" placeholder="Zip / Postal Code *">
-									<select>
-										<option>-- Country --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
+						</div> -->
+						<div class="col-sm-5 clearfix">
+							<div class="bill-to">
+								<p>Billing and Shipping Address</p>
+								<div class="form-one">
+									<!-- <form> -->
+										<input class="form-control" type="text" placeholder="Company Name" name="companyName" [(ngModel)]="userProfile.companyName" #companyName="ngModel" />
+										<!-- <input type="text" placeholder="Email*"> -->
+										<input class="form-control" type="email" placeholder="Email *"  name="email" [(ngModel)]="userProfile.email" #email="ngModel" [email]="true" required readonly />
+										<div *ngIf="email.invalid  && !orderSubmitted"  class="alert alert-danger">
+										  <div *ngIf="email.errors?.required">
+										    Email is required.
+										  </div>
+											<div *ngIf="email.errors?.email">
+										    Invalid email.
+										  </div>
+										</div>
+										<input class="form-control" type="text" placeholder="Title" name="title" [(ngModel)]="userProfile.title" #title="ngModel">
+										<input class="form-control" type="text" placeholder="First Name *" name="name" [(ngModel)]="userProfile.name" #name="ngModel" required>
+										<div *ngIf="name.invalid  && (!orderSubmitted || name.touched)"  class="alert alert-danger">
+											<div *ngIf="name.errors?.required">
+												Name is required.
+											</div>
+										</div>
+										<!-- <input class="form-control" type="text" placeholder="Middle Name"> -->
+										<input class="form-control" type="text" placeholder="Last Name" name="lname" [(ngModel)]="userProfile.lname" #lname="ngModel">
+									<!-- </form>	 -->
+								</div>
+								<div class="form-two">
+									<input class="form-control" type="text" placeholder="Address 1 *"  name="address1" [(ngModel)]="userAddress.address1" #address1="ngModel"  required />
+									<div *ngIf="address1.invalid  && (!orderSubmitted || address1.touched)"  class="alert alert-danger">
+										<div *ngIf="address1.errors?.required">
+											Address1 is required.
+										</div>
+									</div>
+
+									<input class="form-control" type="text" placeholder="Address 2"  name="address2" [(ngModel)]="userAddress.address2" #address2="ngModel"  />
+
+									<input class="form-control" type="text" placeholder="Zip / Postal Code *" name="zipcode" [(ngModel)]="userAddress.zipcode" #zipcode="ngModel">
+									<select class="form-control"  name="country" [(ngModel)]="userAddress.country" #country="ngModel">
+										<option value="">-- Country --</option>
+										<option value="United States">United States</option>
+										<option value="UK">UK</option>
+										<option value="India">India</option>
+										<option value="Pakistan">Pakistan</option>
+										<option value="Ukraine">Ukraine</option>
+										<option value="Canada">Canada</option>
+										<option value="Dubai">Dubai</option>
 									</select>
-									<select>
-										<option>-- State / Province / Region --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
+									<select class="form-control"  name="state" [(ngModel)]="userAddress.state" #state="ngModel">
+										<option value="">-- State / Province / Region --</option>
+										<option value="Rajasthan">Rajasthan</option>
+										<option value="Delhi">Delhi</option>
+										<option value="Uttar Pradesh">Uttar Pradesh</option>
+										<option value="Madhya Pradesh">Madhya Pradesh</option>
+										<option value="Punjab">Punjab</option>
+										<option value="Himachal">Himachal</option>
+										<option value="Bengal">Bengal</option>
 									</select>
-									<!-- <input type="password" placeholder="Confirm password"> -->
 									<!-- <input type="text" placeholder="Phone *"> -->
-									<input type="text" placeholder="Mobile Phone *">
-									<!-- <input type="text" placeholder="Fax"> -->
-								</form>
+									<!-- <input type="text" placeholder="Mobile Phone *"> -->
+									<input class="form-control" type="text" placeholder="Mobile Phone *"  name="mobile" [(ngModel)]="userAddress.mobile" #mobile="ngModel"  required />
+									<div *ngIf="mobile.invalid  && !orderSubmitted"  class="alert alert-danger">
+										<div *ngIf="mobile.errors?.required">
+											Mobile is required.
+										</div>
+									</div>
+
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- <div class="col-sm-4">
-						<div class="order-message">
-							<p>Shipping Order</p>
-							<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="6"></textarea>
-							<label><input type="checkbox"> Shipping to bill address</label>
-						</div>
-					</div> -->
+						<!-- <div class="col-sm-4">
+							<div class="order-message">
+								<p>Shipping Order</p>
+								<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="6"></textarea>
+								<label><input type="checkbox"> Shipping to bill address</label>
+							</div>
+						</div> -->
 
+					</div>
 				</div>
-			</div>
-			<div class="review-payment">
-				<h2>Review & Payment</h2>
-			</div>
+				<div class="review-payment">
+					<h2>Review & Payment</h2>
+				</div>
 
-			<div class="table-responsive cart_info">
-				<table class="table table-condensed">
-					<thead>
-						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
-							<td></td>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- <tr>
-							<td class="cart_product">
-								<a href=""><img src="/assets/images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr> -->
+				<div class="table-responsive cart_info">
+					<table class="table table-condensed">
+						<thead>
+							<tr class="cart_menu">
+								<td class="image">Item</td>
+								<td class="description"></td>
+								<td class="price">Price</td>
+								<td class="quantity">Quantity</td>
+								<td class="total">Total</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
 
-						<tr *ngFor="let product of cartProducts">
-							<td class="cart_product">
-								<a href=""><img src="/assets/images/shop/{{product.productId.images}}.jpg" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">{{product.productId.title}}</a></h4>
-								<p>Web ID: {{product.productId.sku}}{{product._id}}</p>
-							</td>
-							<td class="cart_price">
-								<p>${{product.productId.price}}</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
+							<tr *ngFor="let product of cartProducts">
+								<td class="cart_product">
+									<a href=""><img src="/assets/images/shop/{{product.productId.images}}.jpg" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">{{product.productId.title}}</a></h4>
+									<p>Web ID: {{product.productId.sku}}</p>
+								</td>
+								<td class="cart_price">
+									<p>${{product.productId.price}}</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
 
-									<a class="cart_quantity_down cursor-pointer" (click)="decrementProductQty(product)"> - </a>
-									<!-- <input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly (onchange)="updateQty(product)"  autocomplete="off" size="2"> -->
-									<input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly  autocomplete="off" size="2">
-									<a class="cart_quantity_up cursor-pointer"  (click)="incrementProductQty(product)"> + </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">${{product.productId.price * product.productQty}}</p>
-							</td>
-							<td class="cart_delete">
-								<!-- <a class="cart_quantity_delete" (click)="open(content)"><i class="fa fa-times"></i></a> -->
-								<a class="cart_quantity_delete cursor-pointer" (click)="removeCartProduct(product)"><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+										<a class="cart_quantity_down cursor-pointer" (click)="decrementProductQty(product)"> - </a>
+										<!-- <input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly (onchange)="updateQty(product)"  autocomplete="off" size="2"> -->
+										<input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly  autocomplete="off" size="2">
+										<a class="cart_quantity_up cursor-pointer"  (click)="incrementProductQty(product)"> + </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">${{product.productId.price * product.productQty}}</p>
+								</td>
+								<td class="cart_delete">
+									<a class="cart_quantity_delete cursor-pointer" (click)="removeCartProduct(product)"><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
 
-						<tr>
-							<td colspan="4">&nbsp;</td>
-							<td colspan="2">
-								<table class="table table-condensed total-result">
-									<tr>
-										<td>Cart Sub Total</td>
-										<td>${{shopcart.grossTotal}}</td>
-									</tr>
-									<tr>
-										<td>Eco Tax</td>
-										<td>${{shopcart.tax}}</td>
-									</tr>
-									<tr class="shipping-cost">
-										<td>Shipping Cost</td>
-										<td>${{shopcart.shippingCost}}</td>
-									</tr>
-									<tr>
-										<td>Total</td>
-										<td><span>${{shopcart.netTotal}}</span></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="payment-options">
-					<span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Check Payment</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Paypal</label>
-					</span>
-					<!-- <button type="submit" class="btn btn-default check_out">Order now</button> -->
-					<div class="clearfix">
-							<button type="submit" class="btn btn-default check_out">Order now</button>
-					</div>
-			</div>
-
+							<tr>
+								<td colspan="4">&nbsp;</td>
+								<td colspan="2">
+									<table class="table table-condensed total-result">
+										<tr>
+											<td>Cart Sub Total</td>
+											<td>${{shopcart.grossTotal}}</td>
+										</tr>
+										<tr>
+											<td>Eco Tax</td>
+											<td>${{shopcart.tax}}</td>
+										</tr>
+										<tr class="shipping-cost">
+											<td>Shipping Cost</td>
+											<td>${{shopcart.shippingCost}}</td>
+										</tr>
+										<tr>
+											<td>Total</td>
+											<td><span>${{shopcart.netTotal}}</span></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="payment-options">
+						<span>
+							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Direct Bank Transfer"> Direct Bank Transfer</label>
+						</span>
+						<span>
+							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Check Payment"> Check Payment</label>
+						</span>
+						<span>
+							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Paypal"> Paypal</label>
+						</span>
+						<div class="clearfix">
+								<button type="submit" class="btn btn-default check_out" (click)="orderSubmitted = true">Order now</button>
+						</div>
+				</div>
+			</form>
 		</div>
 	</section> <!--/#cart_items-->
 

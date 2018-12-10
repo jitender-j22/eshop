@@ -57,7 +57,7 @@ export class CartService {
 
 
   decrementProductQty(product): Observable<Product[]>{
-7    return this.http.post('http://localhost:8080/updateProductQty', {cartId:product._id, productQty:product.productQty});
+    return this.http.post('http://localhost:8080/updateProductQty', {cartId:product._id, productQty:product.productQty});
   }
 
   removeCartProduct(product): Observable<Product[]> {
@@ -79,10 +79,14 @@ export class CartService {
     this.shoppingcart.grossTotal = grossTotal;
     this.shoppingcart.tax = (grossTotal * this.taxRate)/100;
     this.shoppingcart.shippingCost = this.shippingRate;
-    this.shoppingcart.netTotal = grossTotal-(this.shoppingcart.tax+this.shoppingcart.shippingCost);
+    this.shoppingcart.netTotal = grossTotal+(this.shoppingcart.tax+this.shoppingcart.shippingCost);
 
     // console.log(this.shoppingcart);
     return this.shoppingcart;
+  }
+
+  saveOrder(userProfile, userAddress, cartProducts, shopcart, payment){
+    return this.http.post('http://localhost:8080/saveOrder', {userProfile:userProfile, userAddress:userAddress, cartProducts:cartProducts, shopcart:shopcart, payment:payment });
   }
 
 }

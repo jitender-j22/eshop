@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 // import 'rxjs/add/observable/throw';
 // import 'rxjs/add/observable/throw';
 
-import { UserRegistration, UserLogin } from './models/user';
+import { UserRegistration, UserLogin, CurrentUser } from './models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,27 @@ export class UserService {
   }
 
   register(user): Observable<any> {
-
     return this.http.post('http://localhost:8080/register', user);
   }
+
+  getCurrentUser(): Observable<CurrentUser> {
+    return this.http.get('http://localhost:8080/user');
+  }
+
+  updateUserProfile(userProfile): Observable<CurrentUser> {
+    // return this.http.put('http://localhost:8080/user/'+userProfile._id,{"user":userProfile});
+    return this.http.put('http://localhost:8080/user/'+userProfile._id,{"company":userProfile.company, "title":userProfile.title, "name":userProfile.name, "lname":userProfile.lname });
+  }
+
+  getUserShippingAddress(): Observable<any> {
+    return this.http.get('http://localhost:8080/user/shippingAddress');
+  }
+
+  updateUserShippingAddress(userAddress): Observable<any> {
+    return this.http.post('http://localhost:8080/user/shippingAddress',{"address1":userAddress.address1, "address2":userAddress.address2, "zipcode":userAddress.zipcode, "country":userAddress.country, "state":userAddress.state, "mobile":userAddress.mobile   });
+  }
+
+
 
   // errorHandler(error: HttpErrorResponse){
   //   return Observable:throw(error.message || "Server Error");

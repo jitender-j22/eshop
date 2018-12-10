@@ -25,7 +25,7 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h4 class="panel-title"><a routerLink="/myaccount">Change Password</a></h4>
+                  <!-- <h4 class="panel-title"><a routerLink="/myaccount">Change Password</a></h4> -->
                 </div>
               </div>
             </div><!--/category-productsr-->
@@ -41,13 +41,29 @@
             <div class="col-sm-6 clearfix">
               <div class="login-form"><!--profile form-->
     						<h2>Edit your profile here</h2>
-    						<form action="#">
-                  <input type="text" placeholder="Company Name">
-                  <input type="text" placeholder="Email*">
-                  <input type="text" placeholder="Title">
-                  <input type="text" placeholder="First Name *">
-                  <input type="text" placeholder="Middle Name">
-                  <input type="text" placeholder="Last Name *">
+    						<form name="updateProfile" (ngSubmit)="profile.form.valid && saveUpdateProfile(userProfile)" #profile="ngForm">
+
+									<input class="form-control" type="text" placeholder="Company Name" name="company" [(ngModel)]="userProfile.company" #company="ngModel" />
+
+									<!-- <input class="form-control" type="email" placeholder="Email *"  name="email" [(ngModel)]="userProfile.email" #email="ngModel" [email]="true" required readonly /> -->
+									<input class="form-control" type="email" placeholder="Email *"  name="email" [(ngModel)]="userProfile.email" #email="ngModel" [email]="true" required readonly />
+									<div *ngIf="email.invalid  && !profileSubmitted"  class="alert alert-danger">
+										<div *ngIf="email.errors?.required">
+											Email is required.
+										</div>
+										<div *ngIf="email.errors?.email">
+											Invalid email.
+										</div>
+									</div>
+
+									<input class="form-control" type="text" placeholder="Title" name="title" [(ngModel)]="userProfile.title" #title="ngModel">
+									<input class="form-control" type="text" placeholder="First Name *" name="name" [(ngModel)]="userProfile.name" #name="ngModel" required>
+									<div *ngIf="name.invalid  && !profileSubmitted"  class="alert alert-danger">
+										<div *ngIf="name.errors?.required">
+											Name is required.
+										</div>
+									</div>
+									<input class="form-control" type="text" placeholder="Last Name" name="lname" [(ngModel)]="userProfile.lname" #lname="ngModel">
 
     							<button type="submit" class="btn btn-default">Update</button>
     						</form>
@@ -81,44 +97,55 @@
               <div class="bill-to">
   							<p>Your default address</p>
   							<div class="form-one form-two">
-  								<form>
+  								<form name="updateAddress" (ngSubmit)="address.form.valid && saveShippingAddress(userAddress)" #address="ngForm">
 
-  									<input type="text" placeholder="Address 1 *">
-  									<input type="text" placeholder="Address 2">
+  									<!-- <input type="text" placeholder="Address 1 *"> -->
+										<input class="form-control" type="text" placeholder="Address 1 *"  name="address1" [(ngModel)]="userAddress.address1" #address1="ngModel"  required />
+										<div *ngIf="address1.invalid  && (addressSubmitted || address1.touched)"  class="alert alert-danger">
+											<div *ngIf="address1.errors?.required">
+												Address1 is required.
+											</div>
+										</div>
 
-                    <input type="text" placeholder="Zip / Postal Code *">
-  									<select>
-  										<option>-- Country --</option>
-  										<option>United States</option>
-  										<option>Bangladesh</option>
-                      <option>UK</option>
-  										<option>India</option>
-  										<option>Pakistan</option>
-  										<option>Ucrane</option>
-  										<option>Canada</option>
-  										<option>Dubai</option>
+										<input class="form-control" type="text" placeholder="Address 2"  name="address2" [(ngModel)]="userAddress.address2" #address2="ngModel"  />
+
+                    <input class="form-control" type="text" placeholder="Zip / Postal Code *" name="zipcode" [(ngModel)]="userAddress.zipcode" #zipcode="ngModel">
+  									<select class="form-control"  name="country" [(ngModel)]="userAddress.country" #country="ngModel">
+  										<option value="">-- Country --</option>
+  										<option value="United States">United States</option>
+                      <option value="UK">UK</option>
+  										<option value="India">India</option>
+  										<option value="Pakistan">Pakistan</option>
+  										<option value="Ukraine">Ukraine</option>
+  										<option value="Canada">Canada</option>
+  										<option value="Dubai">Dubai</option>
   									</select>
-  									<select>
-  										<option>-- State / Province / Region --</option>
-  										<option>United States</option>
-  										<option>Bangladesh</option>
-  										<option>UK</option>
-  										<option>India</option>
-  										<option>Pakistan</option>
-  										<option>Ucrane</option>
-  										<option>Canada</option>
-  										<option>Dubai</option>
+  									<select class="form-control"  name="state" [(ngModel)]="userAddress.state" #state="ngModel">
+  										<option value="">-- State / Province / Region --</option>
+											<option value="Rajasthan">Rajasthan</option>
+											<option value="Delhi">Delhi</option>
+											<option value="Uttar Pradesh">Uttar Pradesh</option>
+											<option value="Madhya Pradesh">Madhya Pradesh</option>
+											<option value="Punjab">Punjab</option>
+											<option value="Himachal">Himachal</option>
+											<option value="Bengal">Bengal</option>
   									</select>
   									<!-- <input type="text" placeholder="Phone *"> -->
-  									<input type="text" placeholder="Mobile Phone *">
+  									<!-- <input type="text" placeholder="Mobile Phone *"> -->
+										<input class="form-control" type="text" placeholder="Mobile Phone *"  name="mobile" [(ngModel)]="userAddress.mobile" #mobile="ngModel"  required />
+										<div *ngIf="mobile.invalid  && addressSubmitted"  class="alert alert-danger">
+											<div *ngIf="mobile.errors?.required">
+												Mobile is required.
+											</div>
+										</div>
+										<button type="submit" class="btn btn-default" (click)="addressSubmitted = true">Update</button>
 
   								</form>
   							</div>
-  							<div class="form-two">
+  							<!-- <div class="form-two">
   								<form>
-
   								</form>
-  							</div>
+  							</div> -->
   						</div>
 			      </div>
     			</div>
