@@ -44,6 +44,13 @@ export class UserService {
     return this.http.post('http://localhost:8080/user/shippingAddress',{"address1":userAddress.address1, "address2":userAddress.address2, "zipcode":userAddress.zipcode, "country":userAddress.country, "state":userAddress.state, "mobile":userAddress.mobile   });
   }
 
+  getUserOrderHistory(): Observable<any> {
+    return this.http.get('http://localhost:8080/user/getUserOrderHistory');
+  }
+
+  getOrderDetails(orderId): Observable<any> {
+    return this.http.get('http://localhost:8080/user/getOrderDetails/'+orderId);
+  }
 
 
   // errorHandler(error: HttpErrorResponse){

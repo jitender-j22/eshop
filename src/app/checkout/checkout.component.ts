@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Router} from '@angular/router';
 
 import { CartService } from '../cart.service';
 import { UserService } from '../user.service';
@@ -20,12 +21,13 @@ export class CheckoutComponent implements OnInit {
   orderSubmitted = false;
   payment = {};
 
-  constructor(public cartService: CartService, public userService: UserService, private toastr: ToastrService) {
+  constructor(public cartService: CartService, public userService: UserService, private toastr: ToastrService, private router: Router) {
 
   }
 
   ngOnInit() {
     this.cartService.getCart().subscribe((data:any) =>{
+      // console.log(data)
       this.cartProducts = data;
       this.shopcart = this.cartService.recalculateCart(this.cartProducts);
     });
@@ -83,6 +85,7 @@ export class CheckoutComponent implements OnInit {
 
     this.cartService.saveOrder(userProfile, userAddress, cartProducts, shopcart, payment).subscribe((data:any)=>{
       this.toastr.success('Order placed successfully!');
+      this.router.navigate(['countinue-shopping']);
     });
   }
 

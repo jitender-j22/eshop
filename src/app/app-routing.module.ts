@@ -11,6 +11,8 @@ import { ProductlistingComponent } from './productlisting/productlisting.compone
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
 import { MyaccountComponent } from './myaccount/myaccount.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import { ContinueShoppingComponent } from './continue-shopping/continue-shopping.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'product-details/:id', component: ProductdetailsComponent },
   { path: 'myaccount', component: MyaccountComponent },
   { path: 'contactus', component: ContactusComponent },
+  { path: 'countinue-shopping', component: ContinueShoppingComponent },
+  { path: 'order-detail/:id', component: OrderDetailComponent },
   //{ path: 'logout', component: LogoutComponent }
   { path: '**', component: NotfoundComponent }
 ];

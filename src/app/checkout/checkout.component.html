@@ -154,7 +154,7 @@
 								</td>
 								<td class="cart_description">
 									<h4><a href="">{{product.productId.title}}</a></h4>
-									<p>Web ID: {{product.productId.sku}}</p>
+									<p>Web ID: {{product.productId.sku}} {{product.productQty}}</p>
 								</td>
 								<td class="cart_price">
 									<p>${{product.productId.price}}</p>
@@ -164,7 +164,7 @@
 
 										<a class="cart_quantity_down cursor-pointer" (click)="decrementProductQty(product)"> - </a>
 										<!-- <input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly (onchange)="updateQty(product)"  autocomplete="off" size="2"> -->
-										<input class="cart_quantity_input" type="text" name="quantity" [(ngModel)]="product.productQty" readonly  autocomplete="off" size="2">
+										<input class="cart_quantity_input" type="text" name="quantity{{product._id}}" [(ngModel)]="product.productQty" readonly  autocomplete="off" size="2">
 										<a class="cart_quantity_up cursor-pointer"  (click)="incrementProductQty(product)"> + </a>
 									</div>
 								</td>

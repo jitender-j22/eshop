@@ -25,7 +25,6 @@ export class ProductlistingComponent implements OnInit {
   }
 
   addToCart(productId) {
-    console.log("pid :: "+ productId);
     //this.cartService.addToCart(userId, pid);
     this.cartService.addToCart(productId);
   }

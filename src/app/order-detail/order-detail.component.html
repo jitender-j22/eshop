@@ -1,0 +1,72 @@
+
+<app-header></app-header>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+          <div class="left-sidebar">
+            <h2>My Account</h2>
+            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a routerLink="/myaccount">My Profile</a></h4>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a routerLink="/myaccount">My Orders</a></h4>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a routerLink="/myaccount">My Addresses</a></h4>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <!-- <h4 class="panel-title"><a routerLink="/myaccount">Change Password</a></h4> -->
+                </div>
+              </div>
+            </div><!--/category-productsr-->
+
+          </div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+
+          <div class="step-one" id="myorders">
+    				<h2 class="heading">Order Details</h2>
+    			</div>
+    			<div class="checkout-options clearfix">
+
+              <div class="login-form">
+  						<h2>Your order details</h2>
+
+							<div class="table-responsive cart_info">
+								<table class="table table-condensed">
+									<thead>
+										<tr class="cart_menu">
+											<td><strong>Title</strong></td>
+											<td><strong>Qty</strong></td>
+											<td><strong>Price</strong></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let item of orderDetail.items">
+											<td>{{item.productTitle}}</td>
+											<td>{{item.productQty}}</td>
+											<td>{{item.productPrice}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+  					</div>
+    			</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+<app-footer></app-footer>

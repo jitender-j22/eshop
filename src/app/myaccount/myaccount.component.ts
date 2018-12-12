@@ -17,19 +17,23 @@ export class MyaccountComponent implements OnInit {
   userAddress = {};
   addressSubmitted = false;
 
+  userOrders;
+
   constructor(public userService: UserService, private toastr: ToastrService) {
     //this.profileSubmitted = false;
   }
 
   ngOnInit() {
     this.userService.getCurrentUser().subscribe((userdata:any)=>{
-      // console.log(userdata);
       this.userProfile = userdata;
-      //console.log(this.userProfile);
     });
 
     this.userService.getUserShippingAddress().subscribe((shippingdata:any)=>{
       this.userAddress = shippingdata;
+    });
+
+    this.userService.getUserOrderHistory().subscribe((ordersdata:any)=>{
+      this.userOrders = ordersdata;
     });
   }
 

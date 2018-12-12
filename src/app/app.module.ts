@@ -24,6 +24,8 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { MyaccountComponent } from './myaccount/myaccount.component';
 import { RecommendedProductsComponent } from './recommended-products/recommended-products.component';
 import { ConfirmmodalComponent } from './confirmmodal/confirmmodal.component';
+import { ContinueShoppingComponent } from './continue-shopping/continue-shopping.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { ConfirmmodalComponent } from './confirmmodal/confirmmodal.component';
     ProductdetailsComponent,
     MyaccountComponent,
     RecommendedProductsComponent,
-    ConfirmmodalComponent
+    ConfirmmodalComponent,
+    ContinueShoppingComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
