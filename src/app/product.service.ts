@@ -15,12 +15,13 @@ export class ProductService {
 
   constructor(private http:HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:8080/products', {
-            headers: new HttpHeaders().set('withCredentials', 'true')
-        });
+  getTotalProductsCount(): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/getProductsCount');
   }
 
+  getProducts(pageNumber): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:8080/products/'+ pageNumber);
+  }
   // getProducts(): Observable<Product[]> {
   //   return this.http.get<Product[]>('http://localhost:8080/products', {
   //           headers: new HttpHeaders().set('withCredentials', true)

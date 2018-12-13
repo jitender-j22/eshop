@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Product } from '../models/product';
 import { ProductService } from '../product.service';
@@ -13,20 +14,41 @@ import { CartService } from '../cart.service';
 export class ProductlistingComponent implements OnInit {
 
   productList:Product[];
+  productsCount;
+  itemsPerPage = 2;
+  noOfPages;
 
-  constructor(private router:Router, public productService:ProductService, public cartService:CartService) {
-
+  constructor(private router:Router, public productService:ProductService, public cartService:CartService, public route:ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe((products:any)=>{
-      this.productList = products;
+    this.productService.getTotalProductsCount().subscribe((productsCount:any)=>{
+      this.productsCount = productsCount;
+      this.noOfPages = new Array(this.productsCount/this.itemsPerPage);
+      // console.log("count :: "+ this.productsCount)
     });
+
+    this.sub = this.route.params
+       .subscribe(params => {
+          let pageNumber = +params['pageNumber'];
+          if(!pageNumber) { pageNumber = 1;}
+          // console.log(pageNumber);
+          this.getPagedProducts(pageNumber);
+        });
+
   }
 
   addToCart(productId) {
     //this.cartService.addToCart(userId, pid);
     this.cartService.addToCart(productId);
+  }
+
+  getPagedProducts(pageNumber){
+
+    this.productService.getProducts(pageNumber).subscribe((products:any)=>{
+      // console.log(products);
+      this.productList = products;
+    });
   }
 
   // goToProductDetail(product:Product) {

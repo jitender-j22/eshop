@@ -13,27 +13,7 @@
 			<div class="step-one">
 				<h2 class="heading">Step1</h2>
 			</div>
-			<!-- <div class="checkout-options">
-				<h3>New User</h3>
-				<p>Checkout options</p>
-				<ul class="nav">
-					<li>
-						<label><input type="checkbox"> Register Account</label>
-					</li>
-					<li>
-						<label><input type="checkbox"> Guest Checkout</label>
-					</li>
-					<li>
-						<a href=""><i class="fa fa-times"></i>Cancel</a>
-					</li>
-				</ul>
-			</div> -->
-			<!--/checkout-options-->
 
-			<!-- <div class="register-req">
-				<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-			</div> -->
-			<!--/register-req-->
 			<form name="orderForm" (ngSubmit)="orderf.form.valid && saveOrder(userProfile, userAddress, cartProducts, shopcart, payment)" #orderf="ngForm">
 				<div class="shopper-informations">
 					<div class="row">
@@ -54,9 +34,8 @@
 							<div class="bill-to">
 								<p>Billing and Shipping Address</p>
 								<div class="form-one">
-									<!-- <form> -->
 										<input class="form-control" type="text" placeholder="Company Name" name="companyName" [(ngModel)]="userProfile.companyName" #companyName="ngModel" />
-										<!-- <input type="text" placeholder="Email*"> -->
+
 										<input class="form-control" type="email" placeholder="Email *"  name="email" [(ngModel)]="userProfile.email" #email="ngModel" [email]="true" required readonly />
 										<div *ngIf="email.invalid  && !orderSubmitted"  class="alert alert-danger">
 										  <div *ngIf="email.errors?.required">
@@ -75,7 +54,6 @@
 										</div>
 										<!-- <input class="form-control" type="text" placeholder="Middle Name"> -->
 										<input class="form-control" type="text" placeholder="Last Name" name="lname" [(ngModel)]="userProfile.lname" #lname="ngModel">
-									<!-- </form>	 -->
 								</div>
 								<div class="form-two">
 									<input class="form-control" type="text" placeholder="Address 1 *"  name="address1" [(ngModel)]="userAddress.address1" #address1="ngModel"  required />
@@ -111,7 +89,7 @@
 									<!-- <input type="text" placeholder="Phone *"> -->
 									<!-- <input type="text" placeholder="Mobile Phone *"> -->
 									<input class="form-control" type="text" placeholder="Mobile Phone *"  name="mobile" [(ngModel)]="userAddress.mobile" #mobile="ngModel"  required />
-									<div *ngIf="mobile.invalid  && !orderSubmitted"  class="alert alert-danger">
+									<div *ngIf="mobile.invalid  && (!orderSubmitted || mobile.touched)"  class="alert alert-danger">
 										<div *ngIf="mobile.errors?.required">
 											Mobile is required.
 										</div>
@@ -139,7 +117,7 @@
 						<thead>
 							<tr class="cart_menu">
 								<td class="image">Item</td>
-								<td class="description"></td>
+								<td class="description">Details</td>
 								<td class="price">Price</td>
 								<td class="quantity">Quantity</td>
 								<td class="total">Total</td>
@@ -204,14 +182,19 @@
 				</div>
 				<div class="payment-options">
 						<span>
-							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Direct Bank Transfer"> Direct Bank Transfer</label>
+							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Direct Bank Transfer" required> Direct Bank Transfer</label>
 						</span>
 						<span>
-							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Check Payment"> Check Payment</label>
+							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Check Payment" required> Check Payment</label>
 						</span>
 						<span>
-							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Paypal"> Paypal</label>
+							<label><input type="radio" name="paymentmethod" [(ngModel)]="payment.option" #paymentmethod="ngModel" value="Paypal" required> Paypal</label>
 						</span>
+						<div *ngIf="paymentmethod.invalid  && orderSubmitted"  class="alert alert-danger">
+							<div *ngIf="paymentmethod.errors?.required">
+								Payment method is required.
+							</div>
+						</div>
 						<div class="clearfix">
 								<button type="submit" class="btn btn-default check_out" (click)="orderSubmitted = true">Order now</button>
 						</div>

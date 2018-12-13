@@ -84,7 +84,7 @@
 									<thead>
 										<tr class="cart_menu">
 											<td class="description"><strong>Order</strong></td>
-											<td class="price"><strong>Date</strong></td>
+											<td class="price"><strong>Order Date</strong></td>
 										</tr>
 									</thead>
 									<tbody>
@@ -92,7 +92,8 @@
 											<td>
 												<a href="/order-detail/{{userOrder._id}}">{{userOrder._id}}</a>
 											</td>
-											<td>{{userOrder.createdAt}}
+											<td>
+												{{ userOrder.createdAt | date:'dd-MM-yyyy HH:mm:ss' }}
 											</td>
 										</tr>
 									</tbody>
@@ -107,7 +108,7 @@
     			</div>
     			<div class="checkout-options clearfix">
             <div class="col-sm-6 clearfix">
-              <div class="bill-to">
+              <div class="login-form">
   							<p>Your default address</p>
   							<div class="form-one form-two">
   								<form name="updateAddress" (ngSubmit)="address.form.valid && saveShippingAddress(userAddress)" #address="ngForm">

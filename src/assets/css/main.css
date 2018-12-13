@@ -1116,7 +1116,7 @@ h2.title {
   background-color: #FE980F;
   border-color: #FE980F;
   color: #FFFFFF;
-  cursor: default;
+  cursor: pointer;
   z-index: 2;
 }
 

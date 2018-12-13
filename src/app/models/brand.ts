@@ -4,6 +4,7 @@ export interface Brand {
   images: string;
 }
 
+/*
 export const Brands: Brand[] = [
   { id: 1,
     title: 'Acne',
@@ -18,11 +19,12 @@ export const Brands: Brand[] = [
     images:'product11'
   },
   { id: 4,
-    title: 'Oddmolly',
+    title: 'Polo',
     images:'product11'
   },
   { id: 5,
-    title: 'Boudestijn',
+    title: 'Wrangler',
     images:'product11'
   }
 ];
+*/

@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   //{ path: 'product-category/:slug', component: ProductlistingComponent },
   { path: 'shop', component: ProductlistingComponent },
+  { path: 'shop/page/:pageNumber', component: ProductlistingComponent },
   { path: 'product-details/:id', component: ProductdetailsComponent },
   { path: 'myaccount', component: MyaccountComponent },
   { path: 'contactus', component: ContactusComponent },

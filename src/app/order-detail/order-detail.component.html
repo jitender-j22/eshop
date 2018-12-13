@@ -36,9 +36,10 @@
 				<div class="col-sm-9 padding-right">
 
           <div class="step-one" id="myorders">
-    				<h2 class="heading">Order Details</h2>
+    				<h2 class="heading">Order Details <span><i class="fa fa-print cursor-pointer" aria-hidden="true" (click)="print()"></i></span></h2>
+						<span><a class="cursor-pointer" (click)="goBack()">Back</a></span>
     			</div>
-    			<div class="checkout-options clearfix">
+    			<div class="checkout-options clearfix" id="printDiv">
 
               <div class="login-form">
   						<h2>Your order details</h2>
@@ -50,6 +51,7 @@
 											<td><strong>Title</strong></td>
 											<td><strong>Qty</strong></td>
 											<td><strong>Price</strong></td>
+											<td><strong>Total</strong></td>
 										</tr>
 									</thead>
 									<tbody>
@@ -57,7 +59,21 @@
 											<td>{{item.productTitle}}</td>
 											<td>{{item.productQty}}</td>
 											<td>{{item.productPrice}}</td>
+											<td>{{item.productQty*item.productPrice}}</td>
 										</tr>
+                    <tr>
+                      <td>&nbsp;</td>
+											<td colspan="3">
+                        <div class="total_area">
+              						<ul>
+              							<li>Cart Sub Total <span>${{orderDetail.grossTotal}}</span></li>
+              							<li>Eco Tax <span>${{orderDetail.tax}}</span></li>
+              							<li>Shipping Cost <span>${{orderDetail.shippingCost}}</span></li>
+              							<li>Total <span>${{orderDetail.netTotal}}</span></li>
+              						</ul>
+              					</div>
+                      </td>
+                    </tr>
 									</tbody>
 								</table>
 							</div>

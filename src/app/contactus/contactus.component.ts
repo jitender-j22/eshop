@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contactus',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactusComponent implements OnInit {
 
-  constructor() { }
+  contact = {};
+  contactFrmSubmitted = false;
+  constructor(public http: HttpClient) { }
 
   ngOnInit() {
   }
 
+  sendContactEmail(contactInfo){
+
+    console.log(contactInfo);
+    this.http.post('http://localhost:8080/sendemail', contactInfo).subscribe((data:any)=>{
+      console.log(data);
+      this.toastr.success('Email sent!');
+    });
+  }
 }

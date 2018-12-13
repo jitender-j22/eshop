@@ -4,7 +4,7 @@
     <div class="panel panel-default" *ngFor="let category of categoryList">
       <div class="panel-heading" *ngIf="category.hasSubCategory">
         <h4 class="panel-title">
-           <a data-toggle="collapse" data-parent="#accordian" (click)="expandCategory(category.id)  ">  <!-- (click)="expandCategory(category.id)" -->
+           <a data-toggle="collapse" data-parent="#accordian" (click)="expandCategory(category.id)">  <!-- (click)="expandCategory(category.id)" -->
             <span class="badge pull-right"><i class="fa fa-plus fa-menu-{{category.id}} fa-menu"></i></span>
             {{category.title}}
           </a>
@@ -26,19 +26,6 @@
 
   </div><!--/category-productsr-->
 
-  <!-- <p>
-  <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-    Toggle
-  </button>
-</p>
-<div id="collapseExample" [ngbCollapse]="isCollapsed">
-  <div class="card">
-    <div class="card-body">
-      You can collapse this card by clicking Toggle
-    </div>
-  </div>
-</div> -->
 
   <div class="brands_products"><!--brands_products-->
     <h2>Brands</h2>

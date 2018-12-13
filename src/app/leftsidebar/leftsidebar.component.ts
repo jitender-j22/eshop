@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CategoryService } from '../category.service';
+// import { CartService } from '../cart.service';
 import { Category } from '../models/category';
 
 import { BrandService } from '../brand.service';
@@ -18,14 +19,17 @@ export class LeftsidebarComponent implements OnInit {
 
   constructor(public categoryService:CategoryService, public brandService:BrandService) {
     this.categoryList = this.categoryService.getAllCategories();
-    this.brandsList = this.brandService.getAllBrands();
   }
 
   ngOnInit() {
     this.categoryList = this.categoryService.categories;
-    this.brandsList = this.brandService.brands;
+    // this.brandsList = this.brandService.brands;
     //console.log(this.categoryList);
     //console.log(this.brandsList);
+
+    this.brandService.getBrands().subscribe((data:any) =>{
+      this.brandsList = data;
+    });
   }
 
   expandCategory(categoryId) {

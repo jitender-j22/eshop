@@ -58,12 +58,14 @@
 							</div>
 						</div>
 
-						<ul class="pagination">
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">&raquo;</a></li>
-						</ul>
+							<ul class="pagination clearfix">
+								<li class="" routerLinkActive="active" *ngFor="let page of noOfPages; let i=index"><a routerLink="/shop/page/{{i+1}}" >{{i+1}}</a></li>
+								<!-- <li class="" routerLinkActive="active" *ngFor="let page of noOfPages; let i=index"><a (click)="getPagedProducts(i+1)">{{i+1}}</a></li> -->
+								<!-- <li><a href="">2</a></li>
+								<li><a href="">3</a></li>
+								<li><a href="">&raquo;</a></li> -->
+							</ul>
+
 					</div><!--features_items-->
 				</div>
 			</div>

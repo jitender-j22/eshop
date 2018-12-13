@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CartProducts } from './models/shopcart';
 import { Product } from './models/product';
 import { Shopcart } from './models/shopcart';
+import { Brand } from './models/brand';
 
 
 @Injectable({
