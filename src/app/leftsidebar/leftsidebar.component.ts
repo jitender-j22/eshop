@@ -4,7 +4,7 @@ import { CategoryService } from '../category.service';
 // import { CartService } from '../cart.service';
 import { Category } from '../models/category';
 
-import { BrandService } from '../brand.service';
+import { UtilityService } from '../utility.service';
 import { Brand } from '../models/brand';
 
 @Component({
@@ -17,7 +17,7 @@ export class LeftsidebarComponent implements OnInit {
   categoryList:Category[];
   brandsList:Brand[];
 
-  constructor(public categoryService:CategoryService, public brandService:BrandService) {
+  constructor(public categoryService:CategoryService, public utilityService:UtilityService) {
     this.categoryList = this.categoryService.getAllCategories();
   }
 
@@ -27,7 +27,7 @@ export class LeftsidebarComponent implements OnInit {
     //console.log(this.categoryList);
     //console.log(this.brandsList);
 
-    this.brandService.getBrands().subscribe((data:any) =>{
+    this.utilityService.getBrands().subscribe((data:any) =>{
       this.brandsList = data;
     });
   }

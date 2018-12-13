@@ -7,11 +7,11 @@ import { Brand } from './models/brand';
 @Injectable({
   providedIn: 'root'
 })
-export class BrandService {
+export class UtilityService {
 
   constructor(private http: HttpClient) { }
 
-  // getBrands(): Observable<Brand[]> {
-  //   return this.http.get('http://localhost:8080/brands');
-  // }
+  getBrands(): Observable<Brand[]> {
+    return this.http.get('http://localhost:8080/brands');
+  }
 }
