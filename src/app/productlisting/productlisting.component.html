@@ -29,11 +29,12 @@
 					<hr> -->
 					<div class="features_items "><!--features_items-->
 						<h2 class="title text-center">Shop Products</h2>
-						<div class="col-sm-4" *ngFor="let product of productList">
+						<div class="col-sm-4" *ngFor="let product of productList.products">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="/assets/images/shop/{{product.images}}.jpg" alt="" />
+										<!-- <img src="/assets/images/shop/{{product.images}}.jpg" alt="" /> -->
+										<img src="http://localhost:8080/assets/images/shop/{{product.images}}" alt="" />
 										<h2>${{product.price}}</h2>
 										<p>{{product.title}}</p>
 										<a href="javascript:void()" (click)="addToCart(product._id)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -59,11 +60,10 @@
 						</div>
 
 							<ul class="pagination clearfix">
-								<li class="" routerLinkActive="active" *ngFor="let page of noOfPages; let i=index"><a routerLink="/shop/page/{{i+1}}" >{{i+1}}</a></li>
-								<!-- <li class="" routerLinkActive="active" *ngFor="let page of noOfPages; let i=index"><a (click)="getPagedProducts(i+1)">{{i+1}}</a></li> -->
-								<!-- <li><a href="">2</a></li>
-								<li><a href="">3</a></li>
-								<li><a href="">&raquo;</a></li> -->
+								<li class="" routerLinkActive="active" *ngFor="let page of noOfPages.noOfPages; let i=index"><a routerLink="/shop/page/{{i+1}}" >{{i+1}}</a></li>
+								<!-- <li *ngFor="let page of noOfPages.noOfPages; let i=index" class="*ngIf(currentPageNumber == i+1)?active:''"><a routerLink="/shop/page/{{i+1}}" >{{i+1}}</a></li> -->
+
+								<!-- <li><a href="">&raquo;</a></li> -->
 							</ul>
 
 					</div><!--features_items-->

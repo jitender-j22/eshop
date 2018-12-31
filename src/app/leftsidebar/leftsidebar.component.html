@@ -4,22 +4,28 @@
     <div class="panel panel-default" *ngFor="let category of categoryList">
       <div class="panel-heading" *ngIf="category.hasSubCategory">
         <h4 class="panel-title">
-           <a data-toggle="collapse" data-parent="#accordian" (click)="expandCategory(category.id)">  <!-- (click)="expandCategory(category.id)" -->
-            <span class="badge pull-right"><i class="fa fa-plus fa-menu-{{category.id}} fa-menu"></i></span>
+          <input class="form-check-input" type="checkbox" name="category" [checked]="category.checked" (click)="clearOtherCategory(category)" value="{{category._id}}"  (change)="onClickCategory($event.target.checked, category)">
+           <a data-toggle="collapse" data-parent="#accordian" (click)="expandCategory(category._id)">  <!-- (click)="expandCategory(category.id)" -->
+            <span class="badge pull-right"><i class="fa fa-plus fa-menu-{{category._id}} fa-menu"></i></span>
             {{category.title}}
           </a>
         </h4>
       </div>
-      <div id="cat_{{category.id}}" class="panel-collapse  collapse"  *ngIf="category.hasSubCategory">
+      <div id="cat_{{category._id}}" class="panel-collapse  collapse"  *ngIf="category.hasSubCategory">
         <div class="panel-body">
           <ul>
-            <li *ngFor="let subcategory of category.subCategories"><a href="javascript:void(0)">{{subcategory.title}}</a></li>
+            <li *ngFor="let subcategory of category.subCategories">
+              <input class="form-check-input" type="checkbox" name="category" [checked]="subcategory.checked" (click)="clearOtherCategory(subcategory)" value="{{subcategory._id}}" (change)="onClickCategory($event.target.checked, subcategory)">
+              <a href="javascript:void(0)">{{subcategory.title}}</a></li>
           </ul>
         </div>
       </div>
 
       <div class="panel-heading" *ngIf="!category.hasSubCategory">
-        <h4 class="panel-title"><a href="javascript:void(0)">{{category.title}}</a></h4>
+        <h4 class="panel-title">
+          <input class="form-check-input" type="checkbox" name="category" [checked]="category.checked" (click)="clearOtherCategory(category)" value="{{category._id}}"  (change)="onClickCategory($event.target.checked, category)">
+          <a href="javascript:void(0)">{{category.title}}</a>
+        </h4>
       </div>
 
     </div>
@@ -31,13 +37,18 @@
     <h2>Brands</h2>
     <div class="brands-name">
       <ul class="nav nav-pills nav-stacked">
-        <li *ngFor="let brand of brandsList">
-          <a href="javascript:void(0)">
-            <!-- <span class="pull-right">(50)</span> -->
-            {{brand.title}}
-          </a>
-        </li>
 
+        <span><a class="cursor-pointer" (click)="clearBrandFilter()">Clear</a></span>
+        <li *ngFor="let brand of brandsList">
+
+          <!-- <input class="form-check-input" type="checkbox" [(ngModel)]="brand._id" name="brand_{{ brand.title }}"  id="brand_{{brand.title}}" (change)="onClickBrand($event, brand)"> -->
+          <!-- <input class="form-check-input" type="checkbox" name="brand[]" [(ngModel)]="brandFilter.option" #brandFilter="ngModel" [checked]="brand.checked" value="{{brand._id}}" (change)="onClickBrand($event.target.checked, brand)"> -->
+          <!-- {{brand.checked}} -->
+          <input class="form-check-input" type="checkbox" name="brand"  [checked]="brand.checked" (change)="onClickBrand($event.target.checked, brand)">
+          <label class="form-check-label" for="{{brand.title}}">
+              {{brand.title}}
+          </label>
+        </li>
       </ul>
     </div>
   </div><!--/brands_products-->

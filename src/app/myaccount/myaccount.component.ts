@@ -19,8 +19,10 @@ export class MyaccountComponent implements OnInit {
 
   userOrders;
 
+  changePasswordSubmitted = false;
+  userProfilePassword = {};
+
   constructor(public userService: UserService, private toastr: ToastrService) {
-    //this.profileSubmitted = false;
   }
 
   ngOnInit() {
@@ -35,6 +37,10 @@ export class MyaccountComponent implements OnInit {
     this.userService.getUserOrderHistory().subscribe((ordersdata:any)=>{
       this.userOrders = ordersdata;
     });
+  }
+
+  submitChangePassword(userProfilePassword) {
+    console.log(userProfilePassword);
   }
 
   saveUpdateProfile(profile){

@@ -89,9 +89,5 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  // order() {
-  //   console.log("paymentmethod")
-  //   console.log(this.userProfile)
-  //   console.log(this.payment)
-  // }
+
 }

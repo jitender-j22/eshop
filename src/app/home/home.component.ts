@@ -15,13 +15,14 @@ export class HomeComponent implements OnInit {
   productList:Product[];
 
   constructor(public productService:ProductService, public cartService:CartService, private toastr: ToastrService) {
-    this.productService.getProducts().subscribe((products:any)=>{
+    // this.productService.getProducts().subscribe((products:any)=>{
+    this.productService.getFeaturedProducts().subscribe((products:any)=>{
       this.productList = products;
     });
   }
 
   ngOnInit() {
-    this.productList = this.productService.products;
+    // this.productList = this.productService.products;
   }
 
   addToCart(productId) {

@@ -7,10 +7,6 @@ export interface CartProducts {
 }
 
 export interface Shopcart {
-  //id: number;
-  //userId:string;
-  //products:CartProducts[];
-  //totalQty:number;
   grossTotal: number;
   tax: number;
   shippingCost: number;

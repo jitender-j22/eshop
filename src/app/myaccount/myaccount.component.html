@@ -7,7 +7,7 @@
 				<div class="col-sm-3">
           <div class="left-sidebar">
             <h2>My Account</h2>
-            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+            <div class="panel-group category-products" id="accordian"><!-- myaccount menu -->
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title"><a routerLink="/myaccount">My Profile</a></h4>
@@ -25,10 +25,10 @@
               </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <!-- <h4 class="panel-title"><a routerLink="/myaccount">Change Password</a></h4> -->
+                  <h4 class="panel-title"><a routerLink="/myaccount">Change Password</a></h4>
                 </div>
               </div>
-            </div><!--/category-productsr-->
+            </div><!-- myaccount menu -->
 
           </div>
 				</div>
@@ -75,7 +75,6 @@
     				<h2 class="heading">My Orders</h2>
     			</div>
     			<div class="checkout-options clearfix">
-
               <div class="login-form">
   						<h2>Your order history</h2>
 
@@ -172,12 +171,30 @@
             <div class="col-sm-6 clearfix">
               <div class="login-form"><!--orders form-->
     						<h2>Change your password here</h2>
-    						<form action="#">
-    							<input type="text" placeholder="Old Password" />
-    							<input type="email" placeholder="New Password" />
-    							<input type="email" placeholder="Confirm Password" />
+								<form name="updateProfile" (ngSubmit)="changePasswordFrm.form.valid && submitChangePassword(userProfilePassword)" #changePasswordFrm="ngForm">
 
-    							<button type="submit" class="btn btn-default">Update</button>
+									<input class="form-control" type="password" placeholder="Old Password *" name="oldpassword" [(ngModel)]="userProfilePassword.oldpassword" #oldpassword="ngModel" required />
+									<div *ngIf="oldpassword.invalid  && (changePasswordSubmitted || oldpassword.touched)"  class="alert alert-danger">
+										<div *ngIf="oldpassword.errors?.required">
+											Old password is required.
+										</div>
+									</div>
+
+									<input class="form-control" type="password" placeholder="New Password *" name="newpassword" [(ngModel)]="userProfilePassword.newpassword" #newpassword="ngModel" required />
+									<div *ngIf="newpassword.invalid  && (changePasswordSubmitted || newpassword.touched)"  class="alert alert-danger">
+										<div *ngIf="newpassword.errors?.required">
+											New password is required.
+										</div>
+									</div>
+
+									<input class="form-control" type="password" placeholder="Confirm Password *" name="confirmpassword" [(ngModel)]="userProfilePassword.confirmpassword" #confirmpassword="ngModel" required />
+									<div *ngIf="confirmpassword.invalid  && (changePasswordSubmitted || confirmpassword.touched)"  class="alert alert-danger">
+										<div *ngIf="confirmpassword.errors?.required">
+											Confirm password is required.
+										</div>
+									</div>
+
+    							<button type="submit" class="btn btn-default" (click)="changePasswordSubmitted = true">Update</button>
     						</form>
     					</div><!--/orders form-->
             </div>

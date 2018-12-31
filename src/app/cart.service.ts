@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throw } from 'rxjs';
+// import { Observable, throw } from 'rxjs';
+import { Observable} from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 import { CartProducts } from './models/shopcart';
@@ -20,15 +21,7 @@ export class CartService {
   shippingRate:number = 50;
 
   constructor(private toastr: ToastrService, private http:HttpClient) {
-    //this.shoppingcart = {"userId":"", "products":[], "totalQty":0, "grossTotal": 0, "tax": 0, "shippingCost": 0, "netTotal": 0};
-    // this.shoppingcart;
-    // this.shoppingcart.products;
-    //userId:string;
-    // this.shoppingcart.totalQty = 0;
-    // this.shoppingcart.grossTotal = 0;
-    // this.shoppingcart.tax = 0;
-    // this.shoppingcart.shippingCost = 0;
-    // this.shoppingcart.netTotal = 0;
+
   }
 
   getCart(): Observable<Product[]> {
@@ -44,15 +37,6 @@ export class CartService {
   }
 
   incrementProductQty(product): Observable<Product[]>{
-    // console.log(product._id);
-    // console.log(productQty);
-    // console.log(product);
-    // this.http.post('http://localhost:8080/incrementProductQty', {cartId:product._id, productQty:product.productQty}).subscribe((data:any)=>{
-    //   this.toastr.success('Product quantity updated!');
-    //   //this.getCart();
-    //   return data;
-    // });
-    //return ;
     return this.http.post('http://localhost:8080/updateProductQty', {cartId:product._id, productQty:product.productQty});
   }
 

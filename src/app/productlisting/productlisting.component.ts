@@ -13,20 +13,25 @@ import { CartService } from '../cart.service';
 })
 export class ProductlistingComponent implements OnInit {
 
-  productList:Product[];
+  productList:Product[] = [];
   productsCount;
-  itemsPerPage = 2;
-  noOfPages;
+  itemsPerPage = 3;
+  noOfPages = {};
+  currentPageNumber = 1;
+
+  eshopFilter: any = { "brands": [] };
 
   constructor(private router:Router, public productService:ProductService, public cartService:CartService, public route:ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.productService.getTotalProductsCount().subscribe((productsCount:any)=>{
-      this.productsCount = productsCount;
-      this.noOfPages = new Array(this.productsCount/this.itemsPerPage);
-      // console.log("count :: "+ this.productsCount)
-    });
+    // this.productService.getTotalProductsCount().subscribe((productsCount:any)=>{
+    //   // this.productsCount = productsCount;
+    //   // this.noOfPages = new Array(Math.ceil(this.productsCount/this.itemsPerPage));
+    //   // console.log("count :: "+ this.productsCount)
+    //
+    // });
+    this.eshopFilter = this.productService.filters;
 
     this.sub = this.route.params
        .subscribe(params => {
@@ -45,11 +50,21 @@ export class ProductlistingComponent implements OnInit {
 
   getPagedProducts(pageNumber){
 
-    this.productService.getProducts(pageNumber).subscribe((products:any)=>{
+    // this.productService.getProducts(pageNumber).subscribe((products:any)=>{
+    this.productService.getFilteredProducts(this.eshopFilter, pageNumber).subscribe((products:any)=>{
       // console.log(products);
-      this.productList = products;
+      this.productService.displayed.products = products.products;
+      this.productList =  this.productService.displayed;
+// console.log(this.productList);
+      this.productService.displayed.noOfPages = products.noOfPages;
+      this.productService.displayed.productCount = products.productCount;
+
+      // this.noOfPages = new Array(this.productService.displayed.noOfPages);
+      this.noOfPages = this.productService.displayed;
+      this.currentPageNumber = products.currPage;
     });
   }
+
 
   // goToProductDetail(product:Product) {
   //   this.router.navigate(['product-details', product.id]);

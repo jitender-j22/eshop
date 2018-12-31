@@ -3,48 +3,17 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3">
+				<!-- <div class="col-sm-3">
 					<app-leftsidebar></app-leftsidebar>
-				</div>
+				</div> -->
 
-				<div class="col-sm-9 padding-right">
+				<div class="col-sm-12 padding-right">
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="/assets/images/shop/{{product.images}}.jpg" alt="" />
-								<!-- <img src="/assets/images/product-details/1.jpg" alt="" /> -->
+								<img src="http://localhost:8080/assets/images/shop/{{product.images}}" alt="" />
 								<!-- <h3>ZOOM</h3> -->
 							</div>
-							<!-- <div id="similar-product" class="carousel slide" data-ride="carousel"> -->
-
-								  <!-- Wrapper for slides -->
-								  <!-- <div class="carousel-inner">
-										<div class="item active">
-										  <a href=""><img src="/assets/images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="/assets/images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="/assets/images/product-details/similar3.jpg" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="/assets/images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="/assets/images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="/assets/images/product-details/similar3.jpg" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="/assets/images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="/assets/images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="/assets/images/product-details/similar3.jpg" alt=""></a>
-										</div>
-
-									</div> -->
-
-								  <!-- Controls -->
-								  <!-- <a class="left item-control" href="#similar-product" data-slide="prev">
-									<i class="fa fa-angle-left"></i>
-								  </a>
-								  <a class="right item-control" href="#similar-product" data-slide="next">
-									<i class="fa fa-angle-right"></i>
-								  </a>
-							</div> -->
 
 						</div>
 						<div class="col-sm-7">
@@ -64,8 +33,7 @@
 								</span>
 								<p *ngIf="product.availability"><b>Availability:</b> In Stock</p>
 								<p *ngIf="!product.availability"><b>Availability:</b> Out of Stock</p>
-								<!-- <p><b>Condition:</b> New</p> -->
-								<p><b>Brand:</b> {{product.brand}}</p>
+								<p><b>Brand:</b> {{product.brand.title}}</p>
 								<!-- <a href=""><img src="/assets/images/product-details/share.png" class="share img-responsive"  alt="" /></a> -->
 							</div><!--/product-information-->
 						</div>
@@ -76,33 +44,69 @@
 				    <ng-template ngbTabContent>
 							<p *ngIf="product.availability"><b>Availability:</b> In Stock</p>
 							<p *ngIf="!product.availability"><b>Availability:</b> Out of Stock</p>
-							<p><b>Brand:</b> {{product.brand}}</p>
+							<p><b>Brand:</b> {{product.brand.title}}</p>
 							<p><b>Description:</b> {{product.description}} </p>
 				    </ng-template>
 				  </ngb-tab>
 				  <ngb-tab id="reviews-tabset">
-				    <ng-template ngbTabTitle>Reviews <b>(5)</b></ng-template>
+				    <ng-template ngbTabTitle>Reviews <b>({{productRatingsCount}})</b></ng-template>
 				    <ng-template ngbTabContent >
 							<div id="reviews">
 								<div class="col-sm-12">
-									<ul>
+									<div *ngFor="let rating of productRatings">
+										<p>{{rating.rating}} -- {{rating.description}}</p>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<!-- <ul>
 										<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-										<!-- <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-										<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li> -->
-									</ul>
+									</ul> -->
 									<p>Lorem ipsum dolor sit amet,mco laboris nisi ut aliquip ex ea commodo consequat.</p>
 									<p><b>Write Your Review</b></p>
 
-									<form action="#">
-										<span>
-											<input type="text" placeholder="Your Name"/>
-											<input type="email" placeholder="Email Address"/>
-										</span>
-										<textarea name="" ></textarea>
-										<b>Rating: </b> <img src="/assets/images/product-details/rating.png" alt="" />
-										<button type="button" class="btn btn-default pull-right">
-											Submit
-										</button>
+									<form name="reviewForm" (ngSubmit)="reviewFrm.form.valid && saveReview(userReview)" #reviewFrm="ngForm">
+										<!-- <span>
+											<input type="text" placeholder="Your Name *" name="name" [(ngModel)]="userReview.name" #name="ngModel"  required/>
+											<div *ngIf="name.invalid  && (reviewSubmitted || name.touched)"  class="alert alert-danger">
+												<div *ngIf="name.errors?.required">
+													Name is required.
+												</div>
+											</div>
+
+											<input type="email" placeholder="Email Address *"  name="email" [(ngModel)]="userReview.email" #email="ngModel" [email]="true" required />
+											<div *ngIf="email.invalid  && (reviewSubmitted || email.touched)"  class="alert alert-danger">
+											  <div *ngIf="email.errors?.required">
+											    Email is required.
+											  </div>
+												<div *ngIf="email.errors?.email">
+											    Invalid email.
+											  </div>
+											</div>
+
+										</span> -->
+										<label>Description :</label>
+										<textarea name="description" [(ngModel)]="userReview.description"></textarea>
+										<p><b>Rating *: </b></p>
+										<!-- <img src="/assets/images/product-details/rating.png" alt="" />dsf -->
+				<fieldset class="rating clearfix">
+			    <input type="radio" id="star5" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="5" required />				<label class = "full" for="star5" title="Awesome - 5 stars"></label>
+			    <input type="radio" id="star4half" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="4.5" required />	<label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+			    <input type="radio" id="star4" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="4" required />				<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+			    <input type="radio" id="star3half" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="3.5" required />	<label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+			    <input type="radio" id="star3" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="3" required />				<label class = "full" for="star3" title="Meh - 3 stars"></label>
+			    <input type="radio" id="star2half" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="2.5" required />	<label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+			    <input type="radio" id="star2" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="2" required />				<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+			    <input type="radio" id="star1half" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="1.5" required />	<label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+			    <input type="radio" id="star1" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value="1" required />				<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+			    <input type="radio" id="starhalf" name="rating" [(ngModel)]="userReview.rating" #rating="ngModel" value=".5" required />		<label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+			</fieldset>
+			<div *ngIf="rating.invalid  && reviewSubmitted"  class="alert alert-danger clearfix">
+				<div *ngIf="rating.errors?.required">
+					Rating is required.
+				</div>
+			</div>
+										<button type="submit" class="btn btn-default pull-right" (click)="reviewSubmitted = true">Submit</button>
+
 									</form>
 								</div>
 							</div>

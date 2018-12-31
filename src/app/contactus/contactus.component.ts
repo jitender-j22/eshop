@@ -11,16 +11,16 @@ export class ContactusComponent implements OnInit {
 
   contact = {};
   contactFrmSubmitted = false;
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
 
   sendContactEmail(contactInfo){
 
-    console.log(contactInfo);
+    // console.log(contactInfo);
     this.http.post('http://localhost:8080/sendemail', contactInfo).subscribe((data:any)=>{
-      console.log(data);
+      // console.log(data);
       this.toastr.success('Email sent!');
     });
   }

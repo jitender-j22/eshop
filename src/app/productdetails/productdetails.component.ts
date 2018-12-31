@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { ActivatedRoute } from '@angular/router';
 // import { Location } from '@angular/common';
@@ -16,10 +17,16 @@ import { CartService } from '../cart.service';
 export class ProductdetailsComponent implements OnInit {
 
   //route:ActivatedRoute;
-  product:Product = {};
+  product:Product = {'brand':{}};
+  productRatings = [{}];
+  productRatingsCount = 0;
 
-  constructor(public route:ActivatedRoute, public productService:ProductService, private cartService:CartService) {
+  reviewSubmitted = false;
+  userReview = {};
 
+
+
+  constructor(public route:ActivatedRoute, public productService:ProductService, private cartService:CartService, private toastr:ToastrService) {
   }
 
   ngOnInit() {
@@ -30,10 +37,24 @@ export class ProductdetailsComponent implements OnInit {
     this.productService.getProduct(id).subscribe((product:any)=>{
       this.product = product;
     });
+
+    this.productService.getProductRating(id).subscribe((ratings:any)=>{
+      this.productRatings = ratings;
+      this.productRatingsCount = this.productRatings.length
+      // console.log(this.productRatings)
+      // console.log(this.productRatingsCount)
+    });
   }
 
   addToCart(productId) {
     this.cartService.addToCart(productId);
   }
 
+  saveReview(userReview){
+    userReview.productId = this.route.snapshot.paramMap.get('id');
+
+    this.productService.saveRating(userReview).subscribe((data:any)=>{
+      this.toastr.success('Rating added successfully!');
+    });
+  }
 }
