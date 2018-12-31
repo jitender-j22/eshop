@@ -1,4 +1,5 @@
 export interface Category {
+  _id: string,
   hasSubCategory: number,
   title: string;
   description: string;

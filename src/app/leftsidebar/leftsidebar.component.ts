@@ -85,7 +85,7 @@ export class LeftsidebarComponent implements OnInit {
       this.eshopFilter.categories.splice(index,1);
     }
     this.productService.filters = this.eshopFilter;
-    console.log(this.eshopFilter.categories);
+    // console.log(this.eshopFilter.categories);
 
     this.productService.getFilteredProducts(this.eshopFilter, 1).subscribe((products:any)=>{
       // console.log(products);
@@ -121,12 +121,13 @@ export class LeftsidebarComponent implements OnInit {
 
     var items = document.getElementsByName('category');
         for (var i = 0; i < items.length; i++) {
-          if (items[i].type == 'checkbox') {
+          // console.log(items[i].type)
+          if ((<HTMLInputElement>items[i]).type == 'checkbox') {
 
-             if (items[i].value == category._id){
+             if ((<HTMLInputElement>items[i]).value == category._id){
                // console.log("current category");
              }else {
-               items[i].checked = false;
+               (<HTMLInputElement>items[i]).checked = false;
              }
           }
         }
@@ -136,8 +137,8 @@ export class LeftsidebarComponent implements OnInit {
     this.eshopFilter.brands = [];
     var items = document.getElementsByName('brand');
         for (var i = 0; i < items.length; i++) {
-             if (items[i].type == 'checkbox')
-                items[i].checked = false;
+             if ((<HTMLInputElement>items[i]).type == 'checkbox')
+                (<HTMLInputElement>items[i]).checked = false;
         }
     this.productService.getFilteredProducts(this.eshopFilter, 1).subscribe((products:any)=>{
       this.productService.displayed.products = products.products;

@@ -27,11 +27,13 @@ export class UserService {
     return this.http.post('http://localhost:8080/register', user);
   }
 
-  getCurrentUser(): Observable<CurrentUser> {
+  // getCurrentUser(): Observable<CurrentUser> {
+  getCurrentUser(): Observable<any> {
     return this.http.get('http://localhost:8080/user');
   }
 
-  updateUserProfile(userProfile): Observable<CurrentUser> {
+  // updateUserProfile(userProfile): Observable<CurrentUser> {
+  updateUserProfile(userProfile): Observable<any> {
     // return this.http.put('http://localhost:8080/user/'+userProfile._id,{"user":userProfile});
     return this.http.put('http://localhost:8080/user/'+userProfile._id,{"company":userProfile.company, "title":userProfile.title, "name":userProfile.name, "lname":userProfile.lname });
   }

@@ -17,7 +17,8 @@ import { CartService } from '../cart.service';
 export class ProductdetailsComponent implements OnInit {
 
   //route:ActivatedRoute;
-  product:Product = {'brand':{}};
+  // product:Product = {'brand':{}};
+  product:Product;
   productRatings = [{}];
   productRatingsCount = 0;
 
@@ -35,7 +36,9 @@ export class ProductdetailsComponent implements OnInit {
     //console.log(id);
 
     this.productService.getProduct(id).subscribe((product:any)=>{
+
       this.product = product;
+      // console.log(this.product)
     });
 
     this.productService.getProductRating(id).subscribe((ratings:any)=>{

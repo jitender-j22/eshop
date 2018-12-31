@@ -11,7 +11,7 @@ import { CurrentUser } from '../models/user';
 })
 export class MyaccountComponent implements OnInit {
 
-  userProfile:CurrentUser = {};
+  userProfile:CurrentUser;
   profileSubmitted = false;
 
   userAddress = {};

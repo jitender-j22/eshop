@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit {
 
   cartProducts:CartProducts;
   shopcart:Shopcart = {"grossTotal":0, "tax":0, "shippingCost":0, "netTotal": 0 };
-  userProfile:CurrentUser = {};
+  userProfile:CurrentUser;
   userAddress = {};
   orderSubmitted = false;
   payment = {};

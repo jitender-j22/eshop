@@ -24,7 +24,8 @@ export class CartService {
 
   }
 
-  getCart(): Observable<Product[]> {
+  // getCart(): Observable<Product[]> {
+  getCart(): Observable<any> {
     return this.http.get('http://localhost:8080/getCart');
   }
 
@@ -36,16 +37,19 @@ export class CartService {
     return ;
   }
 
-  incrementProductQty(product): Observable<Product[]>{
+  // incrementProductQty(product): Observable<Product[]>{
+  incrementProductQty(product): Observable<any>{
     return this.http.post('http://localhost:8080/updateProductQty', {cartId:product._id, productQty:product.productQty});
   }
 
 
-  decrementProductQty(product): Observable<Product[]>{
+  // decrementProductQty(product): Observable<Product[]>{
+  decrementProductQty(product): Observable<any>{
     return this.http.post('http://localhost:8080/updateProductQty', {cartId:product._id, productQty:product.productQty});
   }
 
-  removeCartProduct(product): Observable<Product[]> {
+  // removeCartProduct(product): Observable<Product[]> {
+  removeCartProduct(product): Observable<any> {
     return this.http.delete('http://localhost:8080/removeCartProduct/'+product._id);
   }
 

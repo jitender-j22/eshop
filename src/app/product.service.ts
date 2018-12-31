@@ -10,7 +10,7 @@ import { Product } from './models/product';
 })
 export class ProductService {
 
-  displayed = {"products":[], "productCount":0};
+  displayed = {"products":[], "productCount":0, "noOfPages":[]};
   // displayed = {};
   // displayed.products:Product[];
   // displayed.productCount:number;

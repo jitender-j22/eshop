@@ -13,7 +13,9 @@ import { CartService } from '../cart.service';
 })
 export class ProductlistingComponent implements OnInit {
 
-  productList:Product[] = [];
+  productList = {"products":[], "productCount":0, "noOfPages":[]};
+  // productList:Product[] = [];
+
   productsCount;
   itemsPerPage = 3;
   noOfPages = {};
@@ -33,7 +35,7 @@ export class ProductlistingComponent implements OnInit {
     // });
     this.eshopFilter = this.productService.filters;
 
-    this.sub = this.route.params
+    this.route.params
        .subscribe(params => {
           let pageNumber = +params['pageNumber'];
           if(!pageNumber) { pageNumber = 1;}

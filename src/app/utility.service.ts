@@ -13,11 +13,13 @@ export class UtilityService {
 
   constructor(private http: HttpClient) { }
 
-  getBrands(): Observable<Brand[]> {
+  // getBrands(): Observable<Brand[]> {
+  getBrands(): Observable<any> {
     return this.http.get('http://localhost:8080/brands');
   }
 
-  getCategories(): Observable<Category[]> {
+  // getCategories(): Observable<Category[]> {
+  getCategories(): Observable<any> {
     return this.http.get('http://localhost:8080/categories');
   }
 }
