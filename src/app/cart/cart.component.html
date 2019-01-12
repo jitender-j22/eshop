@@ -21,7 +21,7 @@
 							<td></td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody *ngIf="cartProducts">
 
 						<tr *ngFor="let product of cartProducts">
 							<td class="cart_product">
@@ -53,6 +53,13 @@
 						</tr>
 
 					</tbody>
+					<tbody *ngIf="!cartProducts">
+						<tr>
+							<td colspan="6" class="cart_product">
+								No products found in cart <a href="/shop"> Continue Shopping</a>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</div>
@@ -66,7 +73,7 @@
 				<!--<h3>What would you like to do next?</h3>
 				 <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
-			<div class="row">
+			<div class="row" *ngIf="cartProducts">
 				<div class="col-sm-6">
 				</div>
 				<div class="col-sm-6">

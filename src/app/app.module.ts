@@ -26,6 +26,7 @@ import { RecommendedProductsComponent } from './recommended-products/recommended
 import { ConfirmmodalComponent } from './confirmmodal/confirmmodal.component';
 import { ContinueShoppingComponent } from './continue-shopping/continue-shopping.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
     RecommendedProductsComponent,
     ConfirmmodalComponent,
     ContinueShoppingComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,11 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
     FormsModule,
     NgbModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }), // ToastrModule added
     HttpClientModule
   ],
   providers: [],

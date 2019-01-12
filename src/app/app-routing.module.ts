@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductlistingComponent } from './productlisting/productlisting.component';
@@ -18,7 +19,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  //{ path: 'not-found', component: NotfoundComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   //{ path: 'product-category/:slug', component: ProductlistingComponent },
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'contactus', component: ContactusComponent },
   { path: 'countinue-shopping', component: ContinueShoppingComponent },
   { path: 'order-detail/:id', component: OrderDetailComponent },
-  //{ path: 'logout', component: LogoutComponent }
+  { path: 'logout', component: LogoutComponent },
   { path: '**', component: NotfoundComponent }
 ];
 

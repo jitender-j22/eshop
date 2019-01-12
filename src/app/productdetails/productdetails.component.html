@@ -20,13 +20,16 @@
 							<div class="product-information"><!--/product-information-->
 								<img src="/assets/images/product-details/new.jpg" class="newarrival" alt="" />
 								<h2>{{product?.title}}</h2>
-								<p>Web ID: {{product?.sku}}</p>
+								<p>Web ID: {{product?.sku}}
+									<!-- {{product|json}} -->
+								</p>
 								<img src="/assets/images/product-details/rating.png" alt="" />
 								<span>
 									<span>US ${{product?.price}}</span>
 									<!-- <label>Quantity:</label>
 									<input type="text" value="3" /> -->
-									<button type="button" (click)="addToCart(product)" class="btn btn-fefault cart">
+
+									<button type="button" (click)="addToCart(product._id)" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
 import { Product } from './models/product';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,11 @@ export class ProductService {
   }
 
   getTotalProductsCount(): Observable<number> {
-    return this.http.get<number>('http://localhost:8080/getProductsCount');
+    return this.http.get<number>(environment.apiBaseUrl+'/getProductsCount');
   }
 
   getFeaturedProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:8080/getFeaturedProducts');
+    return this.http.get<Product[]>(environment.apiBaseUrl+'/getFeaturedProducts');
   }
 
   // getProducts(pageNumber): Observable<Product[]> {
@@ -37,19 +38,19 @@ export class ProductService {
 
   getFilteredProducts(filters, pageNumber): Observable<Product[]> {
     // console.log(filters);
-    return this.http.post<Product[]>('http://localhost:8080/getFilteredProducts', {pageNumber:pageNumber, brandFilter:filters.brands, categoryFilter:filters.categories});
+    return this.http.post<Product[]>(environment.apiBaseUrl+'/getFilteredProducts', {pageNumber:pageNumber, brandFilter:filters.brands, categoryFilter:filters.categories});
   }
 
   getProduct(id): Observable<Product> {
-    return this.http.get<Product>('http://localhost:8080/product/'+id);
+    return this.http.get<Product>(environment.apiBaseUrl+'/product/'+id);
   }
 
   getProductRating(productId): Observable<Product[]> {
-    return this.http.get<any>('http://localhost:8080/rating/'+productId);
+    return this.http.get<any>(environment.apiBaseUrl+'/rating/'+productId);
   }
 
   saveRating(userReview): Observable<Product[]> {
-    return this.http.post<any>('http://localhost:8080/saveRating', {userReview:userReview});
+    return this.http.post<any>(environment.apiBaseUrl+'/saveRating', {userReview:userReview});
   }
 
 }

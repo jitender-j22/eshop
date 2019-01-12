@@ -18,7 +18,7 @@ export class ProductdetailsComponent implements OnInit {
 
   //route:ActivatedRoute;
   // product:Product = {'brand':{}};
-  product:Product;
+  product:any;
   productRatings = [{}];
   productRatingsCount = 0;
 
@@ -50,6 +50,8 @@ export class ProductdetailsComponent implements OnInit {
   }
 
   addToCart(productId) {
+    // console.log("aaya");
+    // console.log(productId);
     this.cartService.addToCart(productId);
   }
 

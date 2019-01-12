@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 // import { Observable, throw } from 'rxjs';
 import { Observable} from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from './../environments/environment';
 
 import { CartProducts } from './models/shopcart';
 import { Product } from './models/product';
@@ -26,12 +27,12 @@ export class CartService {
 
   // getCart(): Observable<Product[]> {
   getCart(): Observable<any> {
-    return this.http.get('http://localhost:8080/getCart');
+    return this.http.get(environment.apiBaseUrl+'/getCart');
   }
 
   addToCart(productId) {
 
-    this.http.post('http://localhost:8080/addToCart', {productId:productId}).subscribe((data:any)=>{
+    this.http.post(environment.apiBaseUrl+'/addToCart', {productId:productId}).subscribe((data:any)=>{
       this.toastr.success('Product successfully added to cart!');
     });
     return ;
@@ -39,18 +40,18 @@ export class CartService {
 
   // incrementProductQty(product): Observable<Product[]>{
   incrementProductQty(product): Observable<any>{
-    return this.http.post('http://localhost:8080/updateProductQty', {cartId:product._id, productQty:product.productQty});
+    return this.http.post(environment.apiBaseUrl+'/updateProductQty', {cartId:product._id, productQty:product.productQty});
   }
 
 
   // decrementProductQty(product): Observable<Product[]>{
   decrementProductQty(product): Observable<any>{
-    return this.http.post('http://localhost:8080/updateProductQty', {cartId:product._id, productQty:product.productQty});
+    return this.http.post(environment.apiBaseUrl+'/updateProductQty', {cartId:product._id, productQty:product.productQty});
   }
 
   // removeCartProduct(product): Observable<Product[]> {
   removeCartProduct(product): Observable<any> {
-    return this.http.delete('http://localhost:8080/removeCartProduct/'+product._id);
+    return this.http.delete(environment.apiBaseUrl+'/removeCartProduct/'+product._id);
   }
 
   recalculateCart(cartProducts) {
@@ -75,7 +76,7 @@ export class CartService {
   }
 
   saveOrder(userProfile, userAddress, cartProducts, shopcart, payment){
-    return this.http.post('http://localhost:8080/saveOrder', {userProfile:userProfile, userAddress:userAddress, cartProducts:cartProducts, shopcart:shopcart, payment:payment });
+    return this.http.post(environment.apiBaseUrl+'/saveOrder', {userProfile:userProfile, userAddress:userAddress, cartProducts:cartProducts, shopcart:shopcart, payment:payment });
   }
 
 }

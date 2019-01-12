@@ -18,7 +18,7 @@ export class ProductlistingComponent implements OnInit {
 
   productsCount;
   itemsPerPage = 3;
-  noOfPages = {};
+  noOfPages:any;
   currentPageNumber = 1;
 
   eshopFilter: any = { "brands": [] };
@@ -27,12 +27,7 @@ export class ProductlistingComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.productService.getTotalProductsCount().subscribe((productsCount:any)=>{
-    //   // this.productsCount = productsCount;
-    //   // this.noOfPages = new Array(Math.ceil(this.productsCount/this.itemsPerPage));
-    //   // console.log("count :: "+ this.productsCount)
-    //
-    // });
+
     this.eshopFilter = this.productService.filters;
 
     this.route.params

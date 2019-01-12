@@ -1,3 +1,5 @@
+import { Brand } from './brand';
+
 export interface Product {
   title: string;
   description: string;
@@ -5,5 +7,5 @@ export interface Product {
   price: number;
   availability: boolean;
   images: string;
-  brand: string;
+  brand: Brand;
 }

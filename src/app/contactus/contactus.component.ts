@@ -9,8 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactusComponent implements OnInit {
 
-  contact = {};
+  contact:any = {"name":""};
   contactFrmSubmitted = false;
+
   constructor(public http: HttpClient, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -18,9 +19,12 @@ export class ContactusComponent implements OnInit {
 
   sendContactEmail(contactInfo){
 
-    // console.log(contactInfo);
     this.http.post('http://localhost:8080/sendemail', contactInfo).subscribe((data:any)=>{
-      // console.log(data);
+      this.contact.name = "";
+      this.contact.email = "";
+      this.contact.subject = "";
+      this.contact.message = "";
+      this.contactFrmSubmitted = false;
       this.toastr.success('Email sent!');
     });
   }

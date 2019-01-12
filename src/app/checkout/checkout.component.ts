@@ -16,10 +16,11 @@ export class CheckoutComponent implements OnInit {
 
   cartProducts:CartProducts;
   shopcart:Shopcart = {"grossTotal":0, "tax":0, "shippingCost":0, "netTotal": 0 };
-  userProfile:CurrentUser;
-  userAddress = {};
+  // userProfile:CurrentUser;
+  userProfile:any;
+  userAddress;
   orderSubmitted = false;
-  payment = {};
+  payment;
 
   constructor(public cartService: CartService, public userService: UserService, private toastr: ToastrService, private router: Router) {
 

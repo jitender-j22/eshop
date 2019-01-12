@@ -63,7 +63,9 @@
 								<!-- <li><a routerLink="#"><i class="fa fa-star"></i> Wishlist</a></li> -->
 								<!-- <li><a routerLink="/checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li> -->
 								<li><a routerLink="/cart" routerLinkActive="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a routerLink="/login" routerLinkActive="active"><i class="fa fa-lock"></i> Login</a></li>
+								<li *ngIf="!isEshopUserLoggedIn"><a routerLink="/login" routerLinkActive="active"><i class="fa fa-lock"></i> Login</a></li>
+								<!-- <li *ngIf="isEshopUserLoggedIn"><a routerLink="/logout" routerLinkActive="active"><i class="fa fa-lock"></i> Logout</a></li> -->
+								<li *ngIf="isEshopUserLoggedIn"><a (click)="logout()"><i class="fa fa-lock"></i> Logout</a></li>
 							</ul>
 						</div>
 					</div>
@@ -103,11 +105,11 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3">
+					<!-- <div class="col-sm-3">
 						<div class="search_box pull-right">
 							<input type="text" placeholder="Search"/>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div><!--/header-bottom-->

@@ -23,11 +23,11 @@
                   <h4 class="panel-title"><a routerLink="/myaccount">My Addresses</a></h4>
                 </div>
               </div>
-              <div class="panel panel-default">
+              <!-- <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title"><a routerLink="/myaccount">Change Password</a></h4>
                 </div>
-              </div>
+              </div> -->
             </div><!-- myaccount menu -->
 
           </div>
@@ -43,7 +43,7 @@
     						<h2>Edit your profile here</h2>
     						<form name="updateProfile" (ngSubmit)="profile.form.valid && saveUpdateProfile(userProfile)" #profile="ngForm">
 
-									<input class="form-control" type="text" placeholder="Company Name" name="company" [(ngModel)]="userProfile.company" #company="ngModel" />
+									<input class="form-control" type="text" placeholder="Company Name" name="company" [(ngModel)]="userProfile.company" #company="ngModel" >
 
 									<!-- <input class="form-control" type="email" placeholder="Email *"  name="email" [(ngModel)]="userProfile.email" #email="ngModel" [email]="true" required readonly /> -->
 									<input class="form-control" type="email" placeholder="Email *"  name="email" [(ngModel)]="userProfile.email" #email="ngModel" [email]="true" required readonly />
@@ -86,7 +86,7 @@
 											<td class="price"><strong>Order Date</strong></td>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody *ngIf="userOrders">
 										<tr *ngFor="let userOrder of userOrders">
 											<td>
 												<a href="/order-detail/{{userOrder._id}}">{{userOrder._id}}</a>
@@ -94,6 +94,11 @@
 											<td>
 												{{ userOrder.createdAt | date:'dd-MM-yyyy HH:mm:ss' }}
 											</td>
+										</tr>
+									</tbody>
+									<tbody *ngIf="!userOrders">
+										<tr>
+											<td colspan="2">No orders found</td>
 										</tr>
 									</tbody>
 								</table>
@@ -164,30 +169,30 @@
     			</div>
 
 
-          <div class="step-one">
+          <!-- <div class="step-one">
     				<h2 class="heading">Change Password</h2>
     			</div>
     			<div class="checkout-options clearfix">
             <div class="col-sm-6 clearfix">
-              <div class="login-form"><!--orders form-->
+              <div class="login-form">
     						<h2>Change your password here</h2>
 								<form name="updateProfile" (ngSubmit)="changePasswordFrm.form.valid && submitChangePassword(userProfilePassword)" #changePasswordFrm="ngForm">
 
-									<input class="form-control" type="password" placeholder="Old Password *" name="oldpassword" [(ngModel)]="userProfilePassword.oldpassword" #oldpassword="ngModel" required />
+									<input class="form-control" type="password" placeholder="Old Password *" name="oldpassword" [(ngModel)]="userProfilePassword.oldpassword" #oldpassword="ngModel" required autocomplete="false" />
 									<div *ngIf="oldpassword.invalid  && (changePasswordSubmitted || oldpassword.touched)"  class="alert alert-danger">
 										<div *ngIf="oldpassword.errors?.required">
 											Old password is required.
 										</div>
 									</div>
 
-									<input class="form-control" type="password" placeholder="New Password *" name="newpassword" [(ngModel)]="userProfilePassword.newpassword" #newpassword="ngModel" required />
+									<input class="form-control" type="password" placeholder="New Password *" name="newpassword" [(ngModel)]="userProfilePassword.newpassword" #newpassword="ngModel" required autocomplete="false" />
 									<div *ngIf="newpassword.invalid  && (changePasswordSubmitted || newpassword.touched)"  class="alert alert-danger">
 										<div *ngIf="newpassword.errors?.required">
 											New password is required.
 										</div>
 									</div>
 
-									<input class="form-control" type="password" placeholder="Confirm Password *" name="confirmpassword" [(ngModel)]="userProfilePassword.confirmpassword" #confirmpassword="ngModel" required />
+									<input class="form-control" type="password" placeholder="Confirm Password *" name="confirmpassword" [(ngModel)]="userProfilePassword.confirmpassword" #confirmpassword="ngModel" autocomplete="false" required />
 									<div *ngIf="confirmpassword.invalid  && (changePasswordSubmitted || confirmpassword.touched)"  class="alert alert-danger">
 										<div *ngIf="confirmpassword.errors?.required">
 											Confirm password is required.
@@ -196,9 +201,9 @@
 
     							<button type="submit" class="btn btn-default" (click)="changePasswordSubmitted = true">Update</button>
     						</form>
-    					</div><!--/orders form-->
+    					</div>
             </div>
-    			</div>
+    			</div> -->
 
 
 				</div>

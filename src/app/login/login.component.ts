@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 
 import { UserService } from '../user.service';
 import { UserRegistration, UserLogin } from '../models/user';
@@ -11,9 +12,8 @@ import { UserRegistration, UserLogin } from '../models/user';
 export class LoginComponent implements OnInit {
 
   loginSubmitted = false;
-  //loginEmail:string = "";
-  //password:string = "";
-  //model: any = {};
+
+
   loginErrors:string;
   registrationErrors:string;
 
@@ -21,30 +21,43 @@ export class LoginComponent implements OnInit {
   userLogin:UserLogin = {"Email":"", "Password":""};
 
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
   login(user) {
     this.loginSubmitted = true;
-    console.log("in login");
+    // console.log("in login");
 
     let userObj = this.userService.login(user)
-        .subscribe((data:any)=>{ console.log("in login success"); console.log(data);}
-                    , (error:any)=>{ console.log("in login error"); console.log(error);  });
+        .subscribe((data:any)=>{
+
+          this.loginErrors = "";
+
+          if (data.email === user.Email) {
+            localStorage.setItem('eshopUserId', data._id);
+            this.router.navigate(['myaccount']);
+          }
+      }
+        , (error:any)=>{
+          // console.log("in login error"); console.log(error);
+          this.loginErrors = "Invalid username or password";
+         });
 
   }
 
   signup(user){
-    console.log("in signup");
-    console.log(user);
 
     let userObj = this.userService.register(user)
-        .subscribe((data:any)=>{ console.log("in success"); console.log(data);}
-                    , (error:any)=>{ console.log("in error"); console.log(error); this.registrationErrors = error.error.errmsg; });
+        .subscribe((data:any)=>{
+          // console.log("in success"); console.log(data);
 
-    console.log("after service call")
-    console.log(userObj);
+        }
+        , (error:any)=>{
+          // console.log("in error"); console.log(error);
+          this.registrationErrors = error.error.errmsg;
+        });
+
   }
 }

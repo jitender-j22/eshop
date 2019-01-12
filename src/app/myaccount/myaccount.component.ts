@@ -11,16 +11,16 @@ import { CurrentUser } from '../models/user';
 })
 export class MyaccountComponent implements OnInit {
 
-  userProfile:CurrentUser;
+  userProfile:CurrentUser = {"company":"", "email":"", "password":"", "title":"","name":"","lname":""};
   profileSubmitted = false;
 
-  userAddress = {};
+  userAddress:any = {"address1":"", "address2":"", "zipcode":"", "country":"", "state":"", "mobile":"" };
   addressSubmitted = false;
 
   userOrders;
 
   changePasswordSubmitted = false;
-  userProfilePassword = {};
+  userProfilePassword:any = {};
 
   constructor(public userService: UserService, private toastr: ToastrService) {
   }
@@ -39,9 +39,9 @@ export class MyaccountComponent implements OnInit {
     });
   }
 
-  submitChangePassword(userProfilePassword) {
-    console.log(userProfilePassword);
-  }
+  // submitChangePassword(userProfilePassword) {
+  //   console.log(userProfilePassword);
+  // }
 
   saveUpdateProfile(profile){
     this.profileSubmitted = true;

@@ -13,7 +13,7 @@ import { UserService } from '../user.service';
 })
 export class OrderDetailComponent implements OnInit {
 
-  orderDetail = {};
+  orderDetail;
   constructor(public route:ActivatedRoute, private userService:UserService, private location:Location) {
   }
 
